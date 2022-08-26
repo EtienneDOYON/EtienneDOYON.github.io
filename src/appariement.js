@@ -46,6 +46,7 @@ document.getElementById('army_entry').onsubmit = (function (e) {
 
     // We hide previous form
     document.getElementById('army_entry').hidden = true;
+    document.getElementById('help-message').hidden = true;
 
     // We prepare the next one, then display it
     let i = 0;
