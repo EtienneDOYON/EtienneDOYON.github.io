@@ -18,7 +18,6 @@ const opponentArmies = {
 }
 
 function initArmies() {
-    e.preventDefault();
     // Build the two armies object
     friendlyArmies.armyList[0].name = document.getElementById('friend1').value;
     friendlyArmies.armyList[1].name = document.getElementById('friend2').value;
@@ -36,6 +35,8 @@ function initArmies() {
 }
 
 document.getElementById('army_entry').onsubmit = (function(e) {
+    e.preventDefault();
+
     initArmies();
 
     // Now we want user to enter new data
