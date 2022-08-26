@@ -44,7 +44,7 @@ function initArmies() {
         friendlyArmies.armyList[i].name = document.getElementById(`friend${i}`).value;
         opponentArmies.armyList[i].name = document.getElementById(`oppone${i}`).value;
         document.getElementById(`t1_a${i}`).innerHTML = document.getElementById(`friend${i}`).value;
-        document.getElementById(`t1_o${i}`).innerHTML = document.getElementById(`friend${i}`).value;
+        document.getElementById(`t1_o${i}`).innerHTML = document.getElementById(`oppone${i}`).value;
     }
 }
 
