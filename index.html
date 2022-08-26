@@ -102,25 +102,31 @@
     <p id="best_matchup" hidden></p>
     
     <form name="turn1" id="turn1" hidden>
-        <select name="play_t1f" id="play_t1f" required>
-            <option id="default" value="" disabled selected>Que jouez-vous ?</option>
-            <option id="t1_a0" value="0"></option>
-            <option id="t1_a1" value="1"></option>
-            <option id="t1_a2" value="2"></option>
-            <option id="t1_a3" value="3"></option>
-            <option id="t1_a4" value="4"></option>
-            <option id="t1_a5" value="5"></option>
-        </select>
+        <div>
+            <p>Jouez une armée face cachée</p>
+            <select name="play_t1f" id="play_t1f" required class="armySelect">
+                <option id="default" value="" disabled selected>Que jouez-vous ?</option>
+                <option id="t1_a0" value="0"></option>
+                <option id="t1_a1" value="1"></option>
+                <option id="t1_a2" value="2"></option>
+                <option id="t1_a3" value="3"></option>
+                <option id="t1_a4" value="4"></option>
+                <option id="t1_a5" value="5"></option>
+            </select>    
+        </div>
 
-        <select name="play_t1o" id="play_t1o" required>
-            <option id="default" value="" disabled selected>Qu'est-ce que votre adversaire joue ?</option>
-            <option id="t1_o0" value="0"></option>
-            <option id="t1_o1" value="1"></option>
-            <option id="t1_o2" value="2"></option>
-            <option id="t1_o3" value="3"></option>
-            <option id="t1_o4" value="4"></option>
-            <option id="t1_o5" value="5"></option>
-        </select>
+        <div>
+            <p>Votre adversaire joue une armée face cachée</p>
+            <select name="play_t1o" id="play_t1o" required class="armySelect">
+                <option id="default" value="" disabled selected>Que joue-t-il?</option>
+                <option id="t1_o0" value="0"></option>
+                <option id="t1_o1" value="1"></option>
+                <option id="t1_o2" value="2"></option>
+                <option id="t1_o3" value="3"></option>
+                <option id="t1_o4" value="4"></option>
+                <option id="t1_o5" value="5"></option>
+            </select>    
+        </div>
 
         <div>
             <input type="submit" value="Valider la sélection">
