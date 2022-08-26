@@ -27,7 +27,7 @@ const opponentArmies = {
     army6: new Army(6),
 }
 
-$('#army_entry').submit(function (e) {
+$('army_entry').submit(function (e) {
     e.preventDefault();
 
     // Build the two armies object
