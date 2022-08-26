@@ -20,6 +20,7 @@ const opponentArmies = {
 const scoreTable = [];
 let bestScore = ['', 0];
 let averageScore = 0;
+let averageScore_t1 = [0, 0, 0, 0, 0, 0];
 
 function dataToString(data) {
     let a = friendlyArmies.armyList[data[0]].name + " VS ";
@@ -180,6 +181,7 @@ document.getElementById('score_list').onsubmit = (async function (e) {
                                                                     const newVal = [`${t1f}${t2o};${t2f}${t1o};${t3f}${t3o};${t4f}${t5o};${t5f}${t4o};${t6f}${t6o}`, totalScore];
                                                                     scoreTable.push(newVal);
 
+                                                                    averageScore_t1[t1f] = totalScore;
                                                                     averageScore += totalScore;
                                                                     if (bestScore[1] < totalScore) bestScore = newVal;
                                                                 }
@@ -200,6 +202,12 @@ document.getElementById('score_list').onsubmit = (async function (e) {
     }
 
     averageScore = averageScore / scoreTable.length;
+    // Cleanup of t1 score
+    let clean = -1;
+    while (++clean < 6) {
+        averageScore_t1[clean] = averageScore_t1[clean] / 6;
+        document.getElementById('t1_tip').innerHTML += `Jouer l'armée ${friendlyArmies.armyList[clean].name} = Score moyen de ${averageScore_t1[clean]}<br>`
+    }
 
     console.log(scoreTable);
     console.log(averageScore);
@@ -210,6 +218,7 @@ document.getElementById('score_list').onsubmit = (async function (e) {
     document.getElementById('best_matchup').hidden = false;
     document.getElementById('best_matchup').innerHTML = `Meilleurs matchs : ${dataToString(bestScore[0])}<br>Score total : ${bestScore[1]}`;
     document.getElementById('turn1').hidden = false;
+
 });
 
 document.getElementById('turn1').onsubmit = (async function (e) {
