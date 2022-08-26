@@ -21,6 +21,22 @@ const scoreTable = [];
 let bestScore = ['', 0];
 let averageScore = 0;
 
+function dataToString(data) {
+    let a = friendlyArmies.armyList[data[0]].name + " VS ";
+    a += opponentArmies.armyList[data[1]].name + ";<br>";
+    a += friendlyArmies.armyList[data[3]].name + " VS ";
+    a += opponentArmies.armyList[data[4]].name + ";<br>";
+    a += friendlyArmies.armyList[data[6]].name + " VS ";
+    a += opponentArmies.armyList[data[7]].name + ";<br>";
+    a += friendlyArmies.armyList[data[9]].name + " VS ";
+    a += opponentArmies.armyList[data[10]].name + ";<br>";
+    a += friendlyArmies.armyList[data[12]].name + " VS ";
+    a += opponentArmies.armyList[data[13]].name + ";<br>";
+    a += friendlyArmies.armyList[data[15]].name + " VS ";
+    a += opponentArmies.armyList[data[16]].name + ";<br>";
+    return a;
+}
+
 function initArmies() {
     // Build the two armies object
     friendlyArmies.armyList[0].name = document.getElementById('friend1').value;
@@ -198,5 +214,5 @@ document.getElementById('score_list').onsubmit = (async function (e) {
     document.getElementById('loading_text_720').hidden = true;
     document.getElementById('success_text').hidden = false;
     document.getElementById('best_matchup').hidden = false;
-    document.getElementById('best_matchup').innerHTML = `Meilleurs matchs : ${bestScore[0]}, pour un score de ${bestScore[1]}`;
+    document.getElementById('best_matchup').innerHTML = `Meilleurs matchs : ${dataToString(bestScore[0])}, pour un score de ${bestScore[1]}`;
 });
