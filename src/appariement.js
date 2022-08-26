@@ -115,19 +115,68 @@ document.getElementById('score_list').onsubmit = (function (e) {
                                         t3o = t2o1;
                                         t2o = t2o2;
                                     }
-                                    let totalScore = parseInt(friendlyArmies.armyList[t1f].scoreTable[t2o]);
-                                    totalScore += parseInt(friendlyArmies.armyList[t2f].scoreTable[t1o]);
-                                    totalScore += parseInt(friendlyArmies.armyList[t3f].scoreTable[t3o]);
-                                    const newVal = [`Match 1 : ${t1f} VS ${t2o}; Match 2 : ${t2f} VS ${t1o}; Match 3 : ${t3f} VS ${t3o}`, totalScore];
-                                    scoreTable.push(newVal);
-
-                                    averageScore += totalScore;
-
-                                    if (bestScore[1] < totalScore) bestScore = newVal;
-                                    // L'adversaire va jouer les armées t2o1 et t2o2 face cachée
-                                    // On va en choisir une, qu'on va nommer t2o. Il va choisir une des notres aussi, nommée t2f.
-                                    // La non choisie sera t3o / t3f
                                     // Matchs finaux de ce tour = t1o VS t2f, t1f VS t2o, t3f VS t3o.
+                                    // Il nous reste 3 armées a présent. On refait la même.
+                                    let t4f = -1;
+                                    while (++t4f < 6) {
+                                        if (t4f == t1f || t4f == t2f || t4f == t3f) continue;
+                                        // t4f face cachée
+                                        let t4o = -1;
+                                        while (++t4o < 6) {
+                                            if (t4o == t1o || t4o == t2o || t4o == t3o) continue;
+                                            // t4o face cachée
+                                            let t5f1 = -1;
+                                            while (++t5f1 < 6) {
+                                                if (t5f1 == t1f || t5f1 == t2f || t5f1 == t3f || t5f1 == t4f) continue;
+                                                let t5f2 = -1;
+                                                while (++t5f2 < 6) {
+                                                    if (t5f2 == t1f || t5f2 == t2f || t5f2 == t3f || t5f2 == t4f || t5f2 == t5f1) continue;
+                                                    let t5o1 = -1;
+                                                    while (++t5o1 < 6) {
+                                                        if (t5o1 == t1o || t5o1 == t2o || t5o1 == t3o || t5o1 == t4o) continue;
+                                                        let t5o2 = -1;
+                                                        while (++t5o2 < 6) {
+                                                            if (t5o2 == t1o || t5o2 == t2o || t5o2 == t3o || t5o2 == t4o || t5o2 == t5o1) continue;
+                                                            let t5f_helper = -1;
+                                                            let t5f, t6f, t5o, t6o;
+                                                            while (++t5f_helper < 2) {
+                                                                if (t5f_helper == 0) {
+                                                                    t6f = t5f2;
+                                                                    t5f = t5f1;
+                                                                } else {
+                                                                    t6f = t5f1;
+                                                                    t5f = t5f2;
+                                                                }
+                                                                let t5o_helper = -1;
+                                                                while (++t5o_helper < 2) {
+                                                                    if (t5o_helper == 0) {
+                                                                        t6o = t5o2;
+                                                                        t5o = t5o1;
+                                                                    } else {
+                                                                        t6o = t5o1;
+                                                                        t5o = t5o2;
+                                                                    }
+
+                                                                    // We finished a fight !!!
+                                                                    let totalScore = parseInt(friendlyArmies.armyList[t1f].scoreTable[t2o]);
+                                                                    totalScore += parseInt(friendlyArmies.armyList[t2f].scoreTable[t1o]);
+                                                                    totalScore += parseInt(friendlyArmies.armyList[t3f].scoreTable[t3o]);
+                                                                    totalScore += parseInt(friendlyArmies.armyList[t4f].scoreTable[t5o]);
+                                                                    totalScore += parseInt(friendlyArmies.armyList[t5f].scoreTable[t4o]);
+                                                                    totalScore += parseInt(friendlyArmies.armyList[t6f].scoreTable[t6o]);
+                                                                    const newVal = [`${t1f}${t2o};${t2f}${t1o};${t3f}${t3o};${t4f}${t5o};${t5f}${t4o};${t6f}${t6o}`, totalScore];
+                                                                    scoreTable.push(newVal);
+
+                                                                    averageScore += totalScore;
+                                                                    if (bestScore[1] < totalScore) bestScore = newVal;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -141,6 +190,7 @@ document.getElementById('score_list').onsubmit = (function (e) {
 
     console.log(scoreTable);
     console.log(averageScore);
+    console.log(bestScore);
 
     document.getElementById('loading_text_720').hidden = true;
     document.getElementById('success_text').hidden = false;
