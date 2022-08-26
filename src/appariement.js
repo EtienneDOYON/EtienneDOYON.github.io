@@ -62,7 +62,7 @@ document.getElementById('army_entry').onsubmit = (function (e) {
 });
 
 // Save score config, switch to job itself
-document.getElementById('score_list').onsubmit = (function (e) {
+document.getElementById('score_list').onsubmit = (async function (e) {
     e.preventDefault();
     document.getElementById('loading_text_720').hidden = false;
     document.getElementById('score_list').hidden = true;
