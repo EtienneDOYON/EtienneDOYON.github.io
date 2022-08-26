@@ -18,8 +18,8 @@ const opponentArmies = {
 }
 
 const scoreTable = [];
-const bestScore = ['', 0];
-const averageScore = 0;
+let bestScore = ['', 0];
+let averageScore = 0;
 
 function initArmies() {
     // Build the two armies object
