@@ -181,7 +181,7 @@ document.getElementById('score_list').onsubmit = (async function (e) {
                                                                     const newVal = [`${t1f}${t2o};${t2f}${t1o};${t3f}${t3o};${t4f}${t5o};${t5f}${t4o};${t6f}${t6o}`, totalScore];
                                                                     scoreTable.push(newVal);
 
-                                                                    averageScore_t1[t1f] = totalScore;
+                                                                    averageScore_t1[t1f] += totalScore;
                                                                     averageScore += totalScore;
                                                                     if (bestScore[1] < totalScore) bestScore = newVal;
                                                                 }
@@ -206,7 +206,7 @@ document.getElementById('score_list').onsubmit = (async function (e) {
     let clean = -1;
     while (++clean < 6) {
         averageScore_t1[clean] = averageScore_t1[clean] / 6;
-        document.getElementById('t1_tip').innerHTML += `Jouer l'armée ${friendlyArmies.armyList[clean].name} = Score moyen de ${averageScore_t1[clean]}<br>`
+        document.getElementById('t1_tip').innerHTML += `Jouer l'armée ${friendlyArmies.armyList[clean].name} = Score total moyen de ${averageScore_t1[clean]}<br>`
     }
 
     console.log(scoreTable);
