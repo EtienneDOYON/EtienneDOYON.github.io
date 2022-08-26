@@ -43,8 +43,8 @@ function initArmies() {
     while (++i < 6) {
         friendlyArmies.armyList[i].name = document.getElementById(`friend${i}`).value;
         opponentArmies.armyList[i].name = document.getElementById(`oppone${i}`).value;
-        document.getElementById(`t1_a${i}`).value = friendlyArmies.armyList[i].name;
-        document.getElementById(`t1_o${i}`).value = opponentArmies.armyList[i].name;
+        document.getElementById(`t1_a${i}`).innerHTML = document.getElementById(`friend${i}`).value;
+        document.getElementById(`t1_o${i}`).innerHTML = document.getElementById(`friend${i}`).value;
     }
 }
 
@@ -208,7 +208,7 @@ document.getElementById('score_list').onsubmit = (async function (e) {
     document.getElementById('loading_text_720').hidden = true;
     document.getElementById('success_text').hidden = false;
     document.getElementById('best_matchup').hidden = false;
-    document.getElementById('best_matchup').innerHTML = `Meilleurs matchs : ${dataToString(bestScore[0])}, pour un score de ${bestScore[1]}`;
+    document.getElementById('best_matchup').innerHTML = `Meilleurs matchs : ${dataToString(bestScore[0])}<br>Score total : ${bestScore[1]}`;
     document.getElementById('turn1').hidden = false;
 });
 
