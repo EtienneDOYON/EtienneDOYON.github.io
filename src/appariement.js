@@ -39,8 +39,20 @@ document.getElementById('army_entry').onsubmit = (function(e) {
 
     initArmies();
 
-    // Now we want user to enter new data
+    // We hide previous form
     document.getElementById('army_entry').hidden = true;
+
+    // We prepare the next one, then display it
+    let i = 0;
+    while (i < 6) {
+        document.getElementById(`army${i}`).innerHTML = friendlyArmies.armyList[i].name;
+        let j = 0;
+        while (j < 6) {
+            document.getElementById(`army${i}_score${j}`).placeholder = opponentArmies.armyList[j].name;
+            j++;
+        }
+        i++;
+    }
     document.getElementById('score_list').hidden = false;
 });
 
