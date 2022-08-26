@@ -43,7 +43,8 @@ function initArmies() {
     while (++i < 6) {
         friendlyArmies.armyList[i].name = document.getElementById(`friend${i}`).value;
         opponentArmies.armyList[i].name = document.getElementById(`oppone${i}`).value;
-        opponentArmies.armyList[i].name = document.getElementById(`t1_a${i}`).value;
+        document.getElementById(`t1_a${i}`).value = friendlyArmies.armyList[i].name;
+        document.getElementById(`t1_o${i}`).value = opponentArmies.armyList[i].name;
     }
 }
 

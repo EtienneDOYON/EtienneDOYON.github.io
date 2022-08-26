@@ -102,7 +102,7 @@
     <p id="best_matchup" hidden></p>
     
     <form name="turn1" id="turn1" hidden>
-        <select name="play_t1" id="play_t1" required>
+        <select name="play_t1f" id="play_t1f" required>
             <option id="default" value="" disabled>Que jouez-vous ?</option>
             <option id="t1_a0" value="0"></option>
             <option id="t1_a1" value="1"></option>
@@ -111,6 +111,17 @@
             <option id="t1_a4" value="4"></option>
             <option id="t1_a5" value="5"></option>
         </select>
+
+        <select name="play_t1o" id="play_t1o" required>
+            <option id="default" value="" disabled>Qu'est-ce que votre adversaire joue ?</option>
+            <option id="t1_o0" value="0"></option>
+            <option id="t1_o1" value="1"></option>
+            <option id="t1_o2" value="2"></option>
+            <option id="t1_o3" value="3"></option>
+            <option id="t1_o4" value="4"></option>
+            <option id="t1_o5" value="5"></option>
+        </select>
+
         <div>
             <input type="submit" value="Valider la sélection">
         </div>
