@@ -36,11 +36,10 @@ function initArmies() {
 }
 
 document.getElementById('army_entry').onsubmit = (function(e) {
+    initArmies();
 
     // Now we want user to enter new data
-    console.log('friend = ', friendlyArmies);
-    console.log('opp = ', opponentArmies);
     document.getElementById('army_entry').hidden = true;
-    
+    document.getElementById('score_list').hidden = false;
 });
 
