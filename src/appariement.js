@@ -27,9 +27,7 @@ const opponentArmies = {
     army6: new Army(6),
 }
 
-document.getElementById('army_entry').onsubmit = function (e) {
-    e.preventDefault();
-
+function submitArmies() {     
     // Build the two armies object
     friendlyArmies.army1.name = document.getElementById('friend1').value;
     friendlyArmies.army2.name = document.getElementById('friend2').value;
@@ -46,8 +44,8 @@ document.getElementById('army_entry').onsubmit = function (e) {
     opponentArmies.army6.name = document.getElementById('oppone6').value;
 
     // Now we want user to enter new data
-    location.href = 'score';
     console.log('friend = ', friendlyArmies);
     console.log('opp = ', opponentArmies);
-};
+    document.getElementById('army_entry').hidden = true;
+}
 
