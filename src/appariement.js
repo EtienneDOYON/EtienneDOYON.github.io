@@ -27,7 +27,7 @@ const opponentArmies = {
     army6: new Army(6),
 }
 
-$('army_entry').submit(function (e) {
+document.getElementById('friend1').onsubmit = function (e) {
     e.preventDefault();
 
     // Build the two armies object
@@ -49,5 +49,5 @@ $('army_entry').submit(function (e) {
     location.href = 'score';
     console.log('friend = ', friendlyArmies);
     console.log('opp = ', opponentArmies);
-});
+};
 
