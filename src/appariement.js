@@ -65,6 +65,8 @@ document.getElementById('army_entry').onsubmit = (function (e) {
 document.getElementById('score_list').onsubmit = (function (e) {
     e.preventDefault();
     document.getElementById('loading_text_720').hidden = false;
+    document.getElementById('score_list').hidden = true;
+    await new Promise(r => setTimeout(r, 100));
 
     let i = 0;
     while (i < 6) {
@@ -194,4 +196,6 @@ document.getElementById('score_list').onsubmit = (function (e) {
 
     document.getElementById('loading_text_720').hidden = true;
     document.getElementById('success_text').hidden = false;
+    document.getElementById('best_matchup').hidden = false;
+    document.getElementById('best_matchup').innerHTML = `Meilleurs matchs : ${bestScore[0]}, pour un score de ${bestScore[1]}`;
 });
