@@ -18,6 +18,8 @@ const opponentArmies = {
 }
 
 const scoreTable = [];
+const bestScore = ['', 0];
+const averageScore = 0;
 
 function initArmies() {
     // Build the two armies object
@@ -68,8 +70,8 @@ document.getElementById('score_list').onsubmit = (function (e) {
     while (i < 6) {
         let j = 0;
         while (j < 6) {
-            friendlyArmies.armyList[i].scoreTable[j] = document.getElementById(`army${i}_score${j}`).value;
-            opponentArmies.armyList[j].scoreTable[i] = document.getElementById(`army${i}_score${j}`).value;
+            friendlyArmies.armyList[i].scoreTable[j] = parseInt(document.getElementById(`army${i}_score${j}`).value);
+            opponentArmies.armyList[j].scoreTable[i] = parseInt(document.getElementById(`army${i}_score${j}`).value);
             j++;
         }
         i++;
@@ -78,32 +80,25 @@ document.getElementById('score_list').onsubmit = (function (e) {
     let t1f = -1;
     while (++t1f < 6) {
         // On pose l'armée t1f sur la table.  
-        console.log('t1f = ', t1f);
         let t1o = -1;
         while (++t1o < 6) {
-            console.log('t1o = ', t1o);
             // L'adversaire pose l'armée t1o face cachée
             let t2f1 = -1;
             while (++t2f1 < 6) {
                 if (t2f1 == t1f) continue; // Armée déjà jouée
                 let t2f2 = -1;
-                console.log('t2f1 = ', t2f1);
                 while (++t2f2 < 6) {
                     if (t2f2 == t2f1 || t2f2 == t1f) continue; // Armée déjà jouée
                     // On a joué contre t1o les armées t2f1 et t2f2.
                     let t2o1 = -1;
-                    console.log('t2f2 = ', t2f2);
                     while (++t2o1 < 6) {
                         if (t2o1 == t1o) continue;
-                        console.log('t2o1 = ', t2o1);
                         let t2o2 = -1;
                         while (++t2o2 < 6) {
                             if (t2o2 == t1o || t2o2 == t2o1) continue;
                             let t3f_helper = -1;
                             let t3f, t2f, t3o, t2o;
-                            console.log('t2o2 = ', t2o2);
                             while (++t3f_helper < 2) {
-                                console.log('t3f_helper = ', t3f_helper);
                                 if (t3f_helper == 0) {
                                     t3f = t2f2;
                                     t2f = t2f1;
@@ -113,7 +108,6 @@ document.getElementById('score_list').onsubmit = (function (e) {
                                 }
                                 let t3o_helper = -1;
                                 while (++t3o_helper < 2) {
-                                    console.log('t3o_helper = ', t3o_helper);
                                     if (t3o_helper == 0) {
                                         t3o = t2o2;
                                         t2o = t2o1;
@@ -121,11 +115,15 @@ document.getElementById('score_list').onsubmit = (function (e) {
                                         t3o = t2o1;
                                         t2o = t2o2;
                                     }
-                                    let totalScore = friendlyArmies.armyList[t1f].scoreTable[t2o];
-                                    totalScore += friendlyArmies.armyList[t2f].scoreTable[t1o];
-                                    totalScore += friendlyArmies.armyList[t3f].scoreTable[t3o];
-                                    scoreTable.push([`Match 1 : ${t1f} VS ${t2o}; Match 2 : ${t2f} VS ${t1o}; Match 3 : ${t3f} VS ${t3o}`, totalScore]);
+                                    let totalScore = parseInt(friendlyArmies.armyList[t1f].scoreTable[t2o]);
+                                    totalScore += parseInt(friendlyArmies.armyList[t2f].scoreTable[t1o]);
+                                    totalScore += parseInt(friendlyArmies.armyList[t3f].scoreTable[t3o]);
+                                    const newVal = [`Match 1 : ${t1f} VS ${t2o}; Match 2 : ${t2f} VS ${t1o}; Match 3 : ${t3f} VS ${t3o}`, totalScore];
+                                    scoreTable.push(newVal);
 
+                                    averageScore += totalScore;
+
+                                    if (bestScore[1] < totalScore) bestScore = newVal;
                                     // L'adversaire va jouer les armées t2o1 et t2o2 face cachée
                                     // On va en choisir une, qu'on va nommer t2o. Il va choisir une des notres aussi, nommée t2f.
                                     // La non choisie sera t3o / t3f
@@ -139,7 +137,10 @@ document.getElementById('score_list').onsubmit = (function (e) {
         }
     }
 
+    averageScore = averageScore / scoreTable.length;
+
     console.log(scoreTable);
+    console.log(averageScore);
 
     document.getElementById('loading_text_720').hidden = true;
     document.getElementById('success_text').hidden = false;
