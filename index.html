@@ -97,8 +97,24 @@
     </form>
 
     <p id="loading_text_720" hidden>Calcul des 8.294.400 matchups en cours...</p>
+    <p id="update_result">Mise à jour des matchups...</p>
     <p id="success_text" hidden>Calculs réalisés !</p>
     <p id="best_matchup" hidden></p>
+    
+    <form name="turn1" id="turn1" hidden>
+        <select name="play_t1" id="play_t1" required>
+            <option id="default" value="" disabled>Que jouez-vous ?</option>
+            <option id="t1_a0" value="0"></option>
+            <option id="t1_a1" value="1"></option>
+            <option id="t1_a2" value="2"></option>
+            <option id="t1_a3" value="3"></option>
+            <option id="t1_a4" value="4"></option>
+            <option id="t1_a5" value="5"></option>
+        </select>
+        <div>
+            <input type="submit" value="Valider la sélection">
+        </div>
+    </form>
 
     <script src="src/appariement.js"></script>
 </body>

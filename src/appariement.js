@@ -39,19 +39,12 @@ function dataToString(data) {
 
 function initArmies() {
     // Build the two armies object
-    friendlyArmies.armyList[0].name = document.getElementById('friend1').value;
-    friendlyArmies.armyList[1].name = document.getElementById('friend2').value;
-    friendlyArmies.armyList[2].name = document.getElementById('friend3').value;
-    friendlyArmies.armyList[3].name = document.getElementById('friend4').value;
-    friendlyArmies.armyList[4].name = document.getElementById('friend5').value;
-    friendlyArmies.armyList[5].name = document.getElementById('friend6').value;
-
-    opponentArmies.armyList[0].name = document.getElementById('oppone1').value;
-    opponentArmies.armyList[1].name = document.getElementById('oppone2').value;
-    opponentArmies.armyList[2].name = document.getElementById('oppone3').value;
-    opponentArmies.armyList[3].name = document.getElementById('oppone4').value;
-    opponentArmies.armyList[4].name = document.getElementById('oppone5').value;
-    opponentArmies.armyList[5].name = document.getElementById('oppone6').value;
+    let i = -1;
+    while (++i < 6) {
+        friendlyArmies.armyList[i].name = document.getElementById(`friend${i}`).value;
+        opponentArmies.armyList[i].name = document.getElementById(`oppone${i}`).value;
+        opponentArmies.armyList[i].name = document.getElementById(`t1_a${i}`).value;
+    }
 }
 
 // Save armies config, switch to score
@@ -215,4 +208,9 @@ document.getElementById('score_list').onsubmit = (async function (e) {
     document.getElementById('success_text').hidden = false;
     document.getElementById('best_matchup').hidden = false;
     document.getElementById('best_matchup').innerHTML = `Meilleurs matchs : ${dataToString(bestScore[0])}, pour un score de ${bestScore[1]}`;
+    document.getElementById('turn1').hidden = false;
+});
+
+document.getElementById('turn1').onsubmit = (async function (e) {
+    e.preventDefault();
 });
