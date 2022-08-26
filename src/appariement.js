@@ -76,33 +76,40 @@ document.getElementById('score_list').onsubmit = (function (e) {
     }
 
     let t1f = -1;
-    while (++t1f < 6) {
+    while (t1f < 5) {
+        t1f++;
         // On pose l'armée t1f sur la table.  
         console.log('t1f = ', t1f);
         let t1o = -1;
-        while (++t1o < 6) {
+        while (t1o < 5) {
+            t1o++;
             console.log('t1o = ', t1o);
             // L'adversaire pose l'armée t1o face cachée
             let t2f1 = -1;
-            while (++t2f1 < 6) {
+            while (t2f1 < 5) {
+                t2f1++;
                 if (t2f1 == t1f) continue; // Armée déjà jouée
                 let t2f2 = -1;
                 console.log('t2f1 = ', t2f1);
-                while (++t2f2 < 6) {
+                while (t2f2 < 5) {
+                    t2f2++;
                     if (t2f2 == t2f1 || t2f2 == t1f) continue; // Armée déjà jouée
                     // On a joué contre t1o les armées t2f1 et t2f2.
                     let t2o1 = -1;
                     console.log('t2f2 = ', t2f2);
-                    while (++t2o1 < 6) {
+                    while (t2o1 < 5) {
+                        t2o1++;
                         if (t2o1 == t1o) continue;
                         console.log('t2o1 = ', t2o1);
                         let t2o2 = -1;
-                        while (++t2o2 < 6) {
+                        while (t2o2 < 5) {
+                            t2o2++;
                             if (t2o2 == t1o || t2o2 == t2o1) continue;
                             let t3f_helper = -1;
                             let t3f, t2f, t3o, t2o;
                             console.log('t2o2 = ', t2o2);
-                            while (++t3f_helper < 2) {
+                            while (t3f_helper < 1) {
+                                t3f_helper++;
                                 console.log('t3f_helper = ', t3f_helper);
                                 if (t3f_helper = 0) {
                                     t3f = t2f2;
@@ -112,7 +119,8 @@ document.getElementById('score_list').onsubmit = (function (e) {
                                     t2f = t2f2;
                                 }
                                 let t3o_helper = -1;
-                                while (++t3o_helper < 2) {
+                                while (t3o_helper < 1) {
+                                    t3o_helper++;
                                     console.log('t3o_helper = ', t3o_helper);
                                     if (t3o_helper = 0) {
                                         t3o = t2o2;
