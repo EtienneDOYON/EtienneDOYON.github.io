@@ -90,12 +90,17 @@ document.getElementById('score_list').onsubmit = (async function (e) {
             opponentArmies.armyList[j].avgScore += 20 - friendlyArmies.armyList[i].scoreTable[j];
             j++;
         }
-        friendlyArmies.armyList[i].avgScore = friendlyArmies.armyList[i].avgScore / 6;
-        opponentArmies.armyList[j].avgScore = opponentArmies.armyList[j].avgScore / 6;
         i++;
     }
+    i = 0
+    while (i < 6) {
+        friendlyArmies.armyList[i].avgScore = friendlyArmies.armyList[i].avgScore / 6;
+        opponentArmies.armyList[i].avgScore = opponentArmies.armyList[i].avgScore / 6;
+        i++;
+    } 
     console.log(friendlyArmies);
     console.log(opponentArmies);
+
     return;
 
 
