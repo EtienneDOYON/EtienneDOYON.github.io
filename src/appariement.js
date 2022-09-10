@@ -133,24 +133,24 @@ document.getElementById('score_list').onsubmit = (async function (e) {
                                     // Il nous reste 3 armées a présent. On refait la même.
                                     let t4f = -1;
                                     while (++t4f < 6) {
-                                        if (t4f == t1f || t4f == t2f || t4f == t3f) continue;
+                                        if (t4f == t1f || t4f == t2f) continue;
                                         // t4f face cachée
                                         let t4o = -1;
                                         while (++t4o < 6) {
-                                            if (t4o == t1o || t4o == t2o || t4o == t3o) continue;
+                                            if (t4o == t1o || t4o == t2o) continue;
                                             // t4o face cachée
                                             let t5f1 = -1;
                                             while (++t5f1 < 6) {
-                                                if (t5f1 == t1f || t5f1 == t2f || t5f1 == t3f || t5f1 == t4f) continue;
+                                                if (t5f1 == t1f || t5f1 == t2f || t5f1 == t4f) continue;
                                                 let t5f2 = -1;
                                                 while (++t5f2 < 6) {
-                                                    if (t5f2 == t1f || t5f2 == t2f || t5f2 == t3f || t5f2 == t4f || t5f2 == t5f1) continue;
+                                                    if (t5f2 == t1f || t5f2 == t2f || t5f2 == t4f || t5f2 == t5f1) continue;
                                                     let t5o1 = -1;
                                                     while (++t5o1 < 6) {
-                                                        if (t5o1 == t1o || t5o1 == t2o || t5o1 == t3o || t5o1 == t4o) continue;
+                                                        if (t5o1 == t1o || t5o1 == t2o || t5o1 == t4o) continue;
                                                         let t5o2 = -1;
                                                         while (++t5o2 < 6) {
-                                                            if (t5o2 == t1o || t5o2 == t2o || t5o2 == t3o || t5o2 == t4o || t5o2 == t5o1) continue;
+                                                            if (t5o2 == t1o || t5o2 == t2o  || t5o2 == t4o || t5o2 == t5o1) continue;
                                                             let t5f_helper = -1;
                                                             let t5f, t6f, t5o, t6o;
                                                             while (++t5f_helper < 2) {
@@ -171,14 +171,20 @@ document.getElementById('score_list').onsubmit = (async function (e) {
                                                                         t5o = t5o2;
                                                                     }
 
+                                                                    let t7f = -1;
+                                                                    let t7o = -1;
+
+                                                                    while (t7f == t1f || t7f == t2f || t7f == t4f || t7f == t5f || t7f == t6f) t7f++;
+                                                                    while (t7o == t1o || t7o == t2o || t7o == t4o || t7o == t5o || t7o == t6o) t7o++;
+
                                                                     // We finished a fight !!!
                                                                     let totalScore = parseInt(friendlyArmies.armyList[t1f].scoreTable[t2o]);
                                                                     totalScore += parseInt(friendlyArmies.armyList[t2f].scoreTable[t1o]);
-                                                                    totalScore += parseInt(friendlyArmies.armyList[t3f].scoreTable[t3o]);
                                                                     totalScore += parseInt(friendlyArmies.armyList[t4f].scoreTable[t5o]);
                                                                     totalScore += parseInt(friendlyArmies.armyList[t5f].scoreTable[t4o]);
                                                                     totalScore += parseInt(friendlyArmies.armyList[t6f].scoreTable[t6o]);
-                                                                    const newVal = [`${t1f}${t2o};${t2f}${t1o};${t3f}${t3o};${t4f}${t5o};${t5f}${t4o};${t6f}${t6o}`, totalScore];
+                                                                    totalScore += parseInt(friendlyArmies.armyList[t7f].scoreTable[t7o]);
+                                                                    const newVal = [`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t6f}${t6o};${t7f}${t7o}`, totalScore];
                                                                     scoreTable.push(newVal);
 
                                                                     averageScore_t1[t1f] += totalScore;
