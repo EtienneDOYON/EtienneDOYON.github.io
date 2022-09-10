@@ -171,8 +171,8 @@ document.getElementById('score_list').onsubmit = (async function (e) {
                                                                         t5o = t5o2;
                                                                     }
 
-                                                                    let t7f = -1;
-                                                                    let t7o = -1;
+                                                                    let t7f = 0;
+                                                                    let t7o = 0;
 
                                                                     while (t7f == t1f || t7f == t2f || t7f == t4f || t7f == t5f || t7f == t6f) t7f++;
                                                                     while (t7o == t1o || t7o == t2o || t7o == t4o || t7o == t5o || t7o == t6o) t7o++;
