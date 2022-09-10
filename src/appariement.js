@@ -111,26 +111,22 @@ document.getElementById('score_list').onsubmit = (async function (e) {
                         while (++t2o2 < 6) {
                             if (t2o2 == t1o || t2o2 == t2o1) continue;
                             let t3f_helper = -1;
-                            let t3f, t2f, t3o, t2o;
+                            let t2f, t2o;
                             while (++t3f_helper < 2) {
                                 if (t3f_helper == 0) {
-                                    t3f = t2f2;
                                     t2f = t2f1;
                                 } else {
-                                    t3f = t2f1;
                                     t2f = t2f2;
                                 }
                                 let t3o_helper = -1;
                                 while (++t3o_helper < 2) {
                                     if (t3o_helper == 0) {
-                                        t3o = t2o2;
                                         t2o = t2o1;
                                     } else {
-                                        t3o = t2o1;
                                         t2o = t2o2;
                                     }
-                                    // Matchs finaux de ce tour = t1o VS t2f, t1f VS t2o, t3f VS t3o.
-                                    // Il nous reste 3 armées a présent. On refait la même.
+                                    // Matchs finaux de ce tour = t1o VS t2f, t1f VS t2o.
+                                    // Les armées non choisies retournent dans la pioche. Il reste 4 matchs a décider.
                                     let t4f = -1;
                                     while (++t4f < 6) {
                                         if (t4f == t1f || t4f == t2f) continue;
@@ -177,6 +173,7 @@ document.getElementById('score_list').onsubmit = (async function (e) {
 //                                                                    while (t7f == t1f || t7f == t2f || t7f == t4f || t7f == t5f || t7f == t6f) t7f++;
 //                                                                    while (t7o == t1o || t7o == t2o || t7o == t4o || t7o == t5o || t7o == t6o) t7o++;
 
+                                                                    console.log("Another match finished. Match number : ", scoreTable.length);
                                                                     // We finished a fight !!!
                                                                     let totalScore = parseInt(friendlyArmies.armyList[t1f].scoreTable[t2o]);
                                                                     totalScore += parseInt(friendlyArmies.armyList[t2f].scoreTable[t1o]);
