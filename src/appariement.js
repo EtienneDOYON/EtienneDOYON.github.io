@@ -87,7 +87,7 @@ document.getElementById('score_list').onsubmit = (async function (e) {
         while (j < 6) {
             friendlyArmies.armyList[i].scoreTable[j] = parseInt(document.getElementById(`army${i}_score${j}`).value);
             friendlyArmies.armyList[i].avgScore += friendlyArmies.armyList[i].scoreTable[j];
-            opponentArmies.armyList[j].avgScore += 20 - friendlyArmies.armyList[i].scoreTable[j];
+            opponentArmies.armyList[j].avgScore += friendlyArmies.armyList[i].scoreTable[j];
             j++;
         }
         i++;
