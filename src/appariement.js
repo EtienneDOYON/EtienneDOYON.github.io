@@ -92,19 +92,31 @@ document.getElementById('score_list').onsubmit = (async function (e) {
         }
         i++;
     }
-    i = 0
+    i = 0;
+    let bestAverageFriend = 0;
+    let bestAverageFriendScore = 0;
+    let bestAverageOpnt = 0;
+    let bestAverageOpntScore = 0;
+    
     while (i < 6) {
         friendlyArmies.armyList[i].avgScore = friendlyArmies.armyList[i].avgScore / 6;
         opponentArmies.armyList[i].avgScore = opponentArmies.armyList[i].avgScore / 6;
+
+        if (friendlyArmies.armyList[i].avgScore > bestAverageFriendScore) {
+            bestAverageFriendScore = friendlyArmies.armyList[i].avgScore;
+            bestAverageFriend = i;
+        }
+        if (friendlyArmies.armyList[i].avgScore > bestAverageOpntScore) {
+            bestAverageOpntScore = friendlyArmies.armyList[i].avgScore;
+            bestAverageOpnt = i;
+        }
         i++;
     } 
-    console.log(friendlyArmies);
-    console.log(opponentArmies);
 
     
     //  let t1f = -1;
     //  we disable everything to test average score more easily
-    let t1f = 6;
+    // let t1f = 6;
 
     // TODO : Fix average score
     // Calc t1f and t1o with these average score (The best average)
