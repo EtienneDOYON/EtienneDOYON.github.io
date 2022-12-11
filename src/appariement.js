@@ -21,7 +21,7 @@ const opponentArmies = {
 const scoreTable = [];
 let bestScore = ['', 0];
 let averageScore = 0;
-let averageScore_t1 = [0, 0, 0, 0, 0, 0];
+let averageScore_t1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 function dataToString(data) {
     let a = friendlyArmies.armyList[data[0]].name + " VS ";
@@ -215,7 +215,8 @@ document.getElementById('score_list').onsubmit = (async function (e) {
                                                                     const newVal = [`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t6f}${t6o};${t7f}${t7o}`, totalScore];
                                                                     scoreTable.push(newVal);
 
-                                                                    averageScore_t1[t1f] += totalScore;
+                                                                    averageScore_t1[2 * t1f] = parseInt(averageScore_t1[2 * t1f]) + parseInt(totalScore);
+                                                                    averageScore_t1[2 * t1f + 1] = parseInt(averageScore_t1[2 * t1f + 1]) + 1;;
                                                                     averageScore += totalScore;
                                                                     if (bestScore[1] < totalScore) bestScore = newVal;
                                                                 }
@@ -237,10 +238,11 @@ document.getElementById('score_list').onsubmit = (async function (e) {
 
     averageScore = averageScore / scoreTable.length;
     // Cleanup of t1 score
-    let clean = -1;
-    while (++clean < 6) {
-        averageScore_t1[clean] = averageScore_t1[clean] / 6;
-        document.getElementById('t1_tip').innerHTML += `Jouer l'armée ${friendlyArmies.armyList[clean].name} = Score total moyen de ${averageScore_t1[clean]}<br>`
+    let clean = 0;
+    while (clean < 12) {
+        averageScore_t1[clean] = parseInt(averageScore_t1[clean]) /  parseInt(averageScore_t1[clean + 1]);
+        document.getElementById('t1_tip').innerHTML += `Jouer l'armée ${friendlyArmies.armyList[clean].name} = Score total moyen de ${averageScore_t1[clean]}<br>`;
+        clean += 2;
     }
 
     console.log(scoreTable);
@@ -250,7 +252,7 @@ document.getElementById('score_list').onsubmit = (async function (e) {
     document.getElementById('loading_text_720').hidden = true;
     document.getElementById('success_text').hidden = false;
     document.getElementById('best_matchup').hidden = false;
-    document.getElementById('best_matchup').innerHTML = `Meilleurs matchs : ${dataToString(bestScore[0])}<br>Score total : ${bestScore[1]}`;
+    document.getElementById('best_matchup').innerHTML = `Meilleurs matchs : <br>${dataToString(bestScore[0])}<br>Score total : ${bestScore[1]}`;
     document.getElementById('turn1').hidden = false;
 
 });
