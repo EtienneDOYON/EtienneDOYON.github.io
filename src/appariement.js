@@ -116,7 +116,7 @@ document.getElementById('score_list').onsubmit = (async function (e) {
     
     //  let t1f = -1;
     //  we disable everything to test average score more easily
-    // let t1f = 6;
+    let t1f = 6;
 
     // TODO : Fix average score
     // Calc t1f and t1o with these average score (The best average)
