@@ -237,19 +237,15 @@ document.getElementById('score_list').onsubmit = (async function (e) {
     // Cleanup of t1 score
     let clean = 0;
     while (clean < 12) {
-        document.getElementById('t1_tip').innerHTML += `Jouer l'armée ${friendlyArmies.armyList[clean / 2].name} = Score total moyen de ${friendlyArmies.armyList[clean / 2].avgScore}<br>`;
+        document.getElementById('t1_tip').innerHTML += `L'armée ${friendlyArmies.armyList[clean / 2].name} gagne en moyenne ${friendlyArmies.armyList[clean / 2].avgScore} points.<br>`;
         clean += 2;
     }
-
-    console.log(averageScore);
-    console.log(bestScore);
 
     document.getElementById('loading_text_720').hidden = true;
     document.getElementById('success_text').hidden = false;
     document.getElementById('best_matchup').hidden = false;
     document.getElementById('best_matchup').innerHTML = `Meilleurs matchs : <br>${dataToString(bestScore[0])}<br>Score total : ${bestScore[1]}`;
     document.getElementById('turn1').hidden = false;
-
 });
 
 document.getElementById('turn1').onsubmit = (async function (e) {
