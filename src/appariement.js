@@ -245,7 +245,7 @@ document.getElementById('score_list').onsubmit = (async function (e) {
         clean += 2;
     }
 
-    console.log(scoreTable);
+    console.log(averageScore_t1);
     console.log(averageScore);
     console.log(bestScore);
 
