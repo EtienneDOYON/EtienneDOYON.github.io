@@ -116,17 +116,18 @@ document.getElementById('score_list').onsubmit = (async function (e) {
     
     //  let t1f = -1;
     //  we disable everything to test average score more easily
-    let t1f = 6;
+    const t1f = bestAverageFriend;
+    const t1o = bestAverageOpnt;
 
     // TODO : Fix average score
     // Calc t1f and t1o with these average score (The best average)
     // Do what's left of the calc
     // Re-calc when opponents and player both play their army
 
-    while (++t1f < 6) {
+//    while (++t1f < 6) {
         // On pose l'armée t1f sur la table.  
-        let t1o = -1;
-        while (++t1o < 6) {
+//        let t1o = -1;
+//        while (++t1o < 6) {
             // L'adversaire pose l'armée t1o face cachée
             let t2f1 = -1;
             while (++t2f1 < 6) {
@@ -232,8 +233,8 @@ document.getElementById('score_list').onsubmit = (async function (e) {
                     }
                 }
             }
-        }
-    }
+//        }
+//    }
 
     averageScore = averageScore / scoreTable.length;
     // Cleanup of t1 score
