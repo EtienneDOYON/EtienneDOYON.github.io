@@ -21,7 +21,6 @@ const opponentArmies = {
 const scoreTable = [];
 let bestScore = ['', 0];
 let averageScore = 0;
-let averageScore_t1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 function dataToString(data) {
     let a = friendlyArmies.armyList[data[0]].name + " VS ";
@@ -215,8 +214,6 @@ document.getElementById('score_list').onsubmit = (async function (e) {
                                                                     const newVal = [`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t6f}${t6o};${t7f}${t7o}`, totalScore];
                                                                     scoreTable.push(newVal);
 
-                                                                    averageScore_t1[2 * t1f] = parseInt(averageScore_t1[2 * t1f]) + parseInt(totalScore);
-                                                                    averageScore_t1[2 * t1f + 1] = parseInt(averageScore_t1[2 * t1f + 1]) + 1;;
                                                                     averageScore += totalScore;
                                                                     if (bestScore[1] < totalScore) bestScore = newVal;
                                                                 }
@@ -240,12 +237,10 @@ document.getElementById('score_list').onsubmit = (async function (e) {
     // Cleanup of t1 score
     let clean = 0;
     while (clean < 12) {
-        averageScore_t1[clean] = parseInt(averageScore_t1[clean]) /  parseInt(averageScore_t1[clean + 1]);
-        document.getElementById('t1_tip').innerHTML += `Jouer l'armée ${friendlyArmies.armyList[clean / 2].name} = Score total moyen de ${averageScore_t1[clean]}<br>`;
+        document.getElementById('t1_tip').innerHTML += `Jouer l'armée ${friendlyArmies.armyList[clean / 2].name} = Score total moyen de ${friendlyArmies.armyList[clean / 2].avgScore}<br>`;
         clean += 2;
     }
 
-    console.log(averageScore_t1);
     console.log(averageScore);
     console.log(bestScore);
 
