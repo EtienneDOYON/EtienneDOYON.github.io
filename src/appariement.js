@@ -241,7 +241,7 @@ document.getElementById('score_list').onsubmit = (async function (e) {
     let clean = 0;
     while (clean < 12) {
         averageScore_t1[clean] = parseInt(averageScore_t1[clean]) /  parseInt(averageScore_t1[clean + 1]);
-        document.getElementById('t1_tip').innerHTML += `Jouer l'armée ${friendlyArmies.armyList[clean].name} = Score total moyen de ${averageScore_t1[clean]}<br>`;
+        document.getElementById('t1_tip').innerHTML += `Jouer l'armée ${friendlyArmies.armyList[clean / 2].name} = Score total moyen de ${averageScore_t1[clean]}<br>`;
         clean += 2;
     }
 
