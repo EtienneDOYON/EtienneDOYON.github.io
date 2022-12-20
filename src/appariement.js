@@ -112,22 +112,9 @@ document.getElementById('score_list').onsubmit = (async function (e) {
         i++;
     } 
 
-    
-    //  let t1f = -1;
-    //  we disable everything to test average score more easily
     const t1f = bestAverageFriend;
     const t1o = bestAverageOpnt;
 
-    // TODO : Fix average score
-    // Calc t1f and t1o with these average score (The best average)
-    // Do what's left of the calc
-    // Re-calc when opponents and player both play their army
-
-//    while (++t1f < 6) {
-        // On pose l'armée t1f sur la table.  
-//        let t1o = -1;
-//        while (++t1o < 6) {
-            // L'adversaire pose l'armée t1o face cachée
             let t2f1 = -1;
             while (++t2f1 < 6) {
                 if (t2f1 == t1f) continue; // Armée déjà jouée
@@ -230,8 +217,6 @@ document.getElementById('score_list').onsubmit = (async function (e) {
                     }
                 }
             }
-//        }
-//    }
 
     averageScore = averageScore / scoreTable.length;
     // Cleanup of t1 score
@@ -240,6 +225,8 @@ document.getElementById('score_list').onsubmit = (async function (e) {
         document.getElementById('t1_tip').innerHTML += `L'armée ${friendlyArmies.armyList[clean / 2].name} gagne en moyenne ${friendlyArmies.armyList[clean / 2].avgScore} points.<br>`;
         clean += 2;
     }
+
+    document.getElementById('t1_tip').innerHTML += `<br>Par conséquent, il est recommandé de jouer l'armée ${friendlyArmies.armyList[bestAverageFriend].name}<br>`
 
     document.getElementById('loading_text_720').hidden = true;
     document.getElementById('success_text').hidden = false;
