@@ -334,10 +334,10 @@ document.getElementById('turn1').onsubmit = (async function (e) {
                                                             const newVal = [`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t6f}${t6o};${t7f}${t7o}`, totalScore];
                                                             scoreTable.push(newVal);
 
-                                                            if (!averageScorePlayed[t2f1+t2f2]) {
-                                                                averageScorePlayed[t2f1+t2f2] = 0;
+                                                            if (!averageScorePlayed[t2f1.toString() + t2f2.toString()]) {
+                                                                averageScorePlayed[t2f1.toString() + t2f2.toString()] = 0;
                                                             }
-                                                            averageScorePlayed[t2f1+t2f2] += totalScore;
+                                                            averageScorePlayed[t2f1.toString() + t2f2.toString()] += totalScore;
 
                                                             averageScore += totalScore;
                                                             if (bestScore[1] < totalScore) bestScore = newVal;
