@@ -46,6 +46,8 @@ function initArmies() {
         friendlyArmies.armyList[i].name = document.getElementById(`friend${i}`).value;
         opponentArmies.armyList[i].name = document.getElementById(`oppone${i}`).value;
         document.getElementById(`t1_a${i}`).innerHTML = document.getElementById(`friend${i}`).value;
+        document.getElementById(`t2f1_a${i}`).innerHTML = document.getElementById(`friend${i}`).value;
+        document.getElementById(`t2f2_a${i}`).innerHTML = document.getElementById(`friend${i}`).value;
         document.getElementById(`t1_o${i}`).innerHTML = document.getElementById(`oppone${i}`).value;
     }
 }
@@ -240,6 +242,7 @@ document.getElementById('turn1').onsubmit = (async function (e) {
     bestScore = ['', 0];
     e.preventDefault();
     document.getElementById('turn1').hidden = true;
+    document.getElementById('best_matchup').hidden = true;
     document.getElementById('update_result').hidden = false;
     await new Promise(r => setTimeout(r, 100));
 
