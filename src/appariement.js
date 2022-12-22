@@ -242,9 +242,6 @@ document.getElementById('turn1').onsubmit = (async function (e) {
     document.getElementById('update_result').hidden = false;
     await new Promise(r => setTimeout(r, 100));
 
-    console.log('t1f', document.getElementById('play_t1f'));
-    console.log('t1f', document.getElementById('play_t1o'));
-
     const t1f = parseInt(document.getElementById('play_t1f').value);
     const t1o = parseInt(document.getElementById('play_t1o').value);
 
@@ -355,6 +352,18 @@ document.getElementById('turn1').onsubmit = (async function (e) {
             }
         }
     }
+    // 18432 résultats dans chaque calcul, il semble.
+
+    let t2BestResult = 0;
+    let t2BestPlay = "";
+    for (const key in averageScorePlayed) {
+        if (averageScorePlayed[key] > t2BestResult) {
+            t2BestResult = averageScorePlayed[key];
+            t2BestPlay = key;
+        }
+    }
+
+    document.getElementById('t2_tip').innerHTML = `Il est donc recommandé de jouer les armées face cachée : <br>- ${friendlyArmies.armyList[parseInt(t2BestPlay[0])].name}<br>- ${friendlyArmies.armyList[parseInt(t2BestPlay[1])].name}<br>`;
 
     // On a maintenant simulé tous les matchs. On veut choisir un duo d'armées a poser. Donc, il faut que je calcule la moyenne du score B+C (t2f1 & t2f2)
 
