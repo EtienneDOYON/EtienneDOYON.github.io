@@ -237,6 +237,7 @@ document.getElementById('score_list').onsubmit = (async function (e) {
 });
 
 document.getElementById('turn1').onsubmit = (async function (e) {
+    bestScore = ['', 0];
     e.preventDefault();
     document.getElementById('turn1').hidden = true;
     document.getElementById('update_result').hidden = false;
@@ -353,6 +354,7 @@ document.getElementById('turn1').onsubmit = (async function (e) {
         }
     }
     // 18432 résultats dans chaque calcul, il semble.
+    // On a maintenant simulé tous les matchs. On veut choisir un duo d'armées a poser. Donc, il faut que je calcule la moyenne du score B+C (t2f1 & t2f2)
 
     let t2BestResult = 0;
     let t2BestPlay = "";
@@ -364,8 +366,6 @@ document.getElementById('turn1').onsubmit = (async function (e) {
     }
 
     document.getElementById('t2_tip').innerHTML = `Il est donc recommandé de jouer les armées face cachée : <br>- ${friendlyArmies.armyList[parseInt(t2BestPlay[0])].name}<br>- ${friendlyArmies.armyList[parseInt(t2BestPlay[1])].name}<br>`;
-
-    // On a maintenant simulé tous les matchs. On veut choisir un duo d'armées a poser. Donc, il faut que je calcule la moyenne du score B+C (t2f1 & t2f2)
 
     averageScore = averageScore / scoreTable.length;
     // Cleanup of t1 score
