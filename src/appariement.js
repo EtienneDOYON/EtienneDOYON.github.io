@@ -246,6 +246,10 @@ document.getElementById('turn1').onsubmit = (async function (e) {
     const t1f = parseInt(document.getElementById('play_t1f').value);
     const t1o = parseInt(document.getElementById('play_t1o').value);
 
+    // Impossible de choisir les armées qui ont déjà été jouées
+    document.getElementById('t2f1_a' + document.getElementById('play_t1f').value).disabled = true;
+    document.getElementById('t2f2_a' + document.getElementById('play_t1f').value).disabled = true;
+
     let t2f1 = -1;
     while (++t2f1 < 6) {
         if (t2f1 == t1f) continue; // Armée déjà jouée
