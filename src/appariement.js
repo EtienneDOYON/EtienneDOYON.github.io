@@ -20,7 +20,7 @@ const opponentArmies = {
 
 const scoreTable = [];
 let bestScore = ['', 0];
-const averageScorePlayed = {};
+let averageScorePlayed = {};
 
 function dataToString(data) {
     let a = friendlyArmies.armyList[data[0]].name + " VS ";
