@@ -121,7 +121,7 @@ document.getElementById('score_list').onsubmit = (async function (e) {
     let t2f1 = -1;
     while (++t2f1 < 6) {
         if (t2f1 == t1f) continue; // Armée déjà jouée
-        let t2f2 = -1;
+        let t2f2 = t2f1;
         while (++t2f2 < 6) {
             if (t2f2 == t2f1 || t2f2 == t1f) continue; // Armée déjà jouée
             // On a joué contre t1o les armées t2f1 et t2f2.
@@ -256,7 +256,7 @@ document.getElementById('turn1').onsubmit = (async function (e) {
     let t2f1 = -1;
     while (++t2f1 < 6) {
         if (t2f1 == t1f) continue; // Armée déjà jouée
-        let t2f2 = -1;
+        let t2f2 = t2f1;
         while (++t2f2 < 6) {
             if (t2f2 == t2f1 || t2f2 == t1f) continue; // Armée déjà jouée
             // On a joué contre t1o les armées t2f1 et t2f2.
