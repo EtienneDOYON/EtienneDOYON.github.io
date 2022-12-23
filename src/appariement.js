@@ -20,7 +20,6 @@ const opponentArmies = {
 
 const scoreTable = [];
 let bestScore = ['', 0];
-let averageScore = 0;
 const averageScorePlayed = {};
 
 function dataToString(data) {
@@ -206,7 +205,6 @@ document.getElementById('score_list').onsubmit = (async function (e) {
                                                             const newVal = [`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t6f}${t6o};${t7f}${t7o}`, totalScore];
                                                             scoreTable.push(newVal);
 
-                                                            averageScore += totalScore;
                                                             if (bestScore[1] < totalScore) bestScore = newVal;
                                                         }
                                                     }
@@ -223,7 +221,6 @@ document.getElementById('score_list').onsubmit = (async function (e) {
         }
     }
 
-    averageScore = averageScore / scoreTable.length;
     // Cleanup of t1 score
     let clean = 0;
     while (clean < 12) {
@@ -349,7 +346,6 @@ document.getElementById('turn1').onsubmit = (async function (e) {
                                                             }
                                                             averageScorePlayed[t2f1.toString() + t2f2.toString()] += totalScore;
 
-                                                            averageScore += totalScore;
                                                             if (bestScore[1] < totalScore) bestScore = newVal;
                                                         }
                                                     }
@@ -377,9 +373,8 @@ document.getElementById('turn1').onsubmit = (async function (e) {
         }
     }
 
-    document.getElementById('t2_tip').innerHTML = `Il est donc recommandé de jouer les armées face cachée : <br>- ${friendlyArmies.armyList[parseInt(t2BestPlay[0])].name}<br>- ${friendlyArmies.armyList[parseInt(t2BestPlay[1])].name}<br>`;
+    document.getElementById('t2_tip').innerHTML = `Il est donc recommandé de jouer les armées suivantes  : <br>- ${friendlyArmies.armyList[parseInt(t2BestPlay[0])].name}<br>- ${friendlyArmies.armyList[parseInt(t2BestPlay[1])].name}<br>`;
 
-    averageScore = averageScore / scoreTable.length;
     // Cleanup of t1 score
     document.getElementById('success_text').hidden = false;
 
@@ -388,7 +383,126 @@ document.getElementById('turn1').onsubmit = (async function (e) {
     document.getElementById('best_matchup').hidden = false;
     document.getElementById('update_result').hidden = true;
     document.getElementById('turn2').hidden = false;
+});
 
-    console.log(averageScorePlayed);
+document.getElementById('turn2').onsubmit = (async function (e) {
+    e.preventDefault();
 
+    const t1f = parseInt(document.getElementById('play_t1f').value);
+    const t2f1 = parseInt(document.getElementById('play_t2f1').value);
+    const t2f2 = parseInt(document.getElementById('play_t2f1').value);
+    const t1o = parseInt(document.getElementById('play_t1o').value);
+    const t2o1 = parseInt(document.getElementById('play_t2o1').value);
+    const t2o2 = parseInt(document.getElementById('play_t2o1').value);
+
+    if (t2f1 == t2f2 || t2o1 == t2o2) {
+        document.getElementById('t2-error-message').hidden = false;
+        return;
+    }
+
+    document.getElementById('t2-error-message').hidden = true;
+    document.getElementById('turn2').hidden = true;
+    document.getElementById('best_matchup').hidden = true;
+    document.getElementById('success_text').hidden = true;
+    document.getElementById('update_result').hidden = false;
+    await new Promise(r => setTimeout(r, 100));
+
+    bestScore = ['', 0];
+    averageScorePlayed = {};
+
+    let t3f_helper = -1;
+    let t2f, t2o;
+    while (++t3f_helper < 2) {
+        if (t3f_helper == 0) {
+            t2f = t2f1;
+        } else {
+            t2f = t2f2;
+        }
+        let t3o_helper = -1;
+        while (++t3o_helper < 2) {
+            if (t3o_helper == 0) {
+                t2o = t2o1;
+            } else {
+                t2o = t2o2;
+            }
+            // Matchs finaux de ce tour = t1o VS t2f, t1f VS t2o.
+            // Les armées non choisies retournent dans la pioche. Il reste 4 matchs a décider.
+            let t4f = -1;
+            while (++t4f < 6) {
+                if (t4f == t1f || t4f == t2f) continue;
+                // t4f face cachée
+                let t4o = -1;
+                while (++t4o < 6) {
+                    if (t4o == t1o || t4o == t2o) continue;
+                    // t4o face cachée
+                    let t5f1 = -1;
+                    while (++t5f1 < 6) {
+                        if (t5f1 == t1f || t5f1 == t2f || t5f1 == t4f) continue;
+                        let t5f2 = -1;
+                        while (++t5f2 < 6) {
+                            if (t5f2 == t1f || t5f2 == t2f || t5f2 == t4f || t5f2 == t5f1) continue;
+                            let t5o1 = -1;
+                            while (++t5o1 < 6) {
+                                if (t5o1 == t1o || t5o1 == t2o || t5o1 == t4o) continue;
+                                let t5o2 = -1;
+                                while (++t5o2 < 6) {
+                                    if (t5o2 == t1o || t5o2 == t2o || t5o2 == t4o || t5o2 == t5o1) continue;
+                                    let t5f_helper = -1;
+                                    let t5f, t6f, t5o, t6o;
+                                    while (++t5f_helper < 2) {
+                                        if (t5f_helper == 0) {
+                                            t6f = t5f2;
+                                            t5f = t5f1;
+                                        } else {
+                                            t6f = t5f1;
+                                            t5f = t5f2;
+                                        }
+                                        let t5o_helper = -1;
+                                        while (++t5o_helper < 2) {
+                                            if (t5o_helper == 0) {
+                                                t6o = t5o2;
+                                                t5o = t5o1;
+                                            } else {
+                                                t6o = t5o1;
+                                                t5o = t5o2;
+                                            }
+
+                                            let t7f = 0;
+                                            let t7o = 0;
+
+                                            while (t7f == t1f || t7f == t2f || t7f == t4f || t7f == t5f || t7f == t6f) t7f++;
+                                            while (t7o == t1o || t7o == t2o || t7o == t4o || t7o == t5o || t7o == t6o) t7o++;
+
+                                            // We finished a fight !!!
+                                            let totalScore = parseInt(friendlyArmies.armyList[t1f].scoreTable[t2o]);
+                                            totalScore += parseInt(friendlyArmies.armyList[t2f].scoreTable[t1o]);
+                                            totalScore += parseInt(friendlyArmies.armyList[t4f].scoreTable[t5o]);
+                                            totalScore += parseInt(friendlyArmies.armyList[t5f].scoreTable[t4o]);
+                                            totalScore += parseInt(friendlyArmies.armyList[t6f].scoreTable[t6o]);
+                                            totalScore += parseInt(friendlyArmies.armyList[t7f].scoreTable[t7o]);
+                                            const newVal = [`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t6f}${t6o};${t7f}${t7o}`, totalScore];
+                                            scoreTable.push(newVal);
+
+                                            if (!averageScorePlayed[t2f.toString()]) {
+                                                averageScorePlayed[t2f.toString()] = 0;
+                                            }
+                                            averageScorePlayed[t2f.toString()] += totalScore;
+
+                                            if (bestScore[1] < totalScore) bestScore = newVal;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    document.getElementById('success_text').hidden = false;
+
+    document.getElementById('best_matchup').innerHTML = `Meilleurs matchs : <br>${dataToString(bestScore[0])}<br>Score total : ${bestScore[1]}`;
+
+    
 });
