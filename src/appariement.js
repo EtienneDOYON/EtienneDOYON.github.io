@@ -390,10 +390,10 @@ document.getElementById('turn2').onsubmit = (async function (e) {
 
     const t1f = parseInt(document.getElementById('play_t1f').value);
     const t2f1 = parseInt(document.getElementById('play_t2f1').value);
-    const t2f2 = parseInt(document.getElementById('play_t2f1').value);
+    const t2f2 = parseInt(document.getElementById('play_t2f2').value);
     const t1o = parseInt(document.getElementById('play_t1o').value);
     const t2o1 = parseInt(document.getElementById('play_t2o1').value);
-    const t2o2 = parseInt(document.getElementById('play_t2o1').value);
+    const t2o2 = parseInt(document.getElementById('play_t2o2').value);
 
     if (t2f1 == t2f2 || t2o1 == t2o2) {
         document.getElementById('t2-error-message').hidden = false;
