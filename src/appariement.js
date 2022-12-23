@@ -874,7 +874,7 @@ document.getElementById('turn5').onsubmit = (async function (e) {
 
     console.log(averageScorePlayed);
 
-    document.getElementById('t6_tip').innerHTML = `Vous devriez donc choisir de combattre l'armée ${opponentArmies.armyList[parseInt(t2BestPlay[0])].name}<br>`;
+    document.getElementById('t6_tip').innerHTML = `Vous devriez donc choisir de combattre l'armée ${opponentArmies.armyList[parseInt(t6BestPlay[0])].name}<br>`;
 
     document.getElementById('best_matchup').innerHTML = `Meilleurs matchs : <br>${dataToString(bestScore[0])}<br>Score total : ${bestScore[1]}`;
 
