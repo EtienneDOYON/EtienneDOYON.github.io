@@ -607,6 +607,12 @@ document.getElementById('turn3').onsubmit = (async function (e) {
                                     while (t7f == t1f || t7f == t2f || t7f == t4f || t7f == t5f || t7f == t6f) t7f++;
                                     while (t7o == t1o || t7o == t2o || t7o == t4o || t7o == t5o || t7o == t6o) t7o++;
 
+                                    if (friendlyArmies.armyList[t4f].scoreTable[t5o] < friendlyArmies.armyList[t4f].scoreTable[t6o]
+                                        && friendlyArmies.armyList[t4f].scoreTable[t5o] < friendlyArmies.armyList[t4f].scoreTable[t7o]
+                                        && friendlyArmies.armyList[t4f].scoreTable[t5o] < friendlyArmies.armyList[t4f].scoreTable[t4o]) {
+                                            continue;
+                                    }
+
                                     // We finished a fight !!!
                                     let totalScore = parseInt(friendlyArmies.armyList[t1f].scoreTable[t2o]);
                                     totalScore += parseInt(friendlyArmies.armyList[t2f].scoreTable[t1o]);
