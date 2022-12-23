@@ -884,3 +884,50 @@ document.getElementById('turn5').onsubmit = (async function (e) {
     document.getElementById('turn6').hidden = false;
 });
 
+document.getElementById('turn6').onsubmit = (async function (e) {
+    e.preventDefault();
+
+    bestScore = ['', 0];
+    averageScorePlayed = {};
+    scoreTable = [];
+
+    const t1f = parseInt(document.getElementById('play_t1f').value);
+    const t2f = parseInt(document.getElementById('play_t2f').value);
+    const t4f = parseInt(document.getElementById('play_t4f').value);
+    const t5f = parseInt(document.getElementById('play_t5f').value);
+    const t1o = parseInt(document.getElementById('play_t1o').value);
+    const t2o = parseInt(document.getElementById('play_t2o').value);
+    const t4o = parseInt(document.getElementById('play_t4o').value);
+    const t5o = parseInt(document.getElementById('play_t5o').value);
+
+    const t5f1 = parseInt(document.getElementById('play_t5f1').value);
+    const t5f2 = parseInt(document.getElementById('play_t5f2').value);
+    const t5o1 = parseInt(document.getElementById('play_t5o1').value);
+    const t5o2 = parseInt(document.getElementById('play_t5o2').value);
+
+    let t6f;
+    let t6o;
+    if (t5f == t5f1) t6f = t5f2;
+    else t6f = t5f1;
+    if (t5o == t5o1) t6o = t5o2;
+    else t6o = t5o1;
+
+    let t7f = 0;
+    let t7o = 0;
+    while (t7f == t1f || t7f == t2f || t7f == t4f || t7f == t5f || t7f == t6f) t7f++;
+    while (t7o == t1o || t7o == t2o || t7o == t4o || t7o == t5o || t7o == t6o) t7o++;
+
+    let totalScore = parseInt(friendlyArmies.armyList[t1f].scoreTable[t2o]);
+    totalScore += parseInt(friendlyArmies.armyList[t2f].scoreTable[t1o]);
+    totalScore += parseInt(friendlyArmies.armyList[t4f].scoreTable[t5o]);
+    totalScore += parseInt(friendlyArmies.armyList[t5f].scoreTable[t4o]);
+    totalScore += parseInt(friendlyArmies.armyList[t6f].scoreTable[t6o]);
+    totalScore += parseInt(friendlyArmies.armyList[t7f].scoreTable[t7o]);
+
+    document.getElementById('turn5').hidden = true;
+    document.getElementById('best_matchup').hidden = true;
+    document.getElementById('success_text').hidden = true;
+
+    document.getElementById('final_result').innerHTML = `Voici les matchs du round : <br>${dataToString(`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t6f}${t6o};${t7f}${t7o}`)}<br>Score total : ${totalScore}`;
+    document.getElementById('final_result').hidden = false;
+});
