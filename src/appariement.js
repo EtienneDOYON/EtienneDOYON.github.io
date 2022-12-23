@@ -18,7 +18,7 @@ const opponentArmies = {
     armyList: [new Army(0), new Army(1), new Army(2), new Army(3), new Army(4), new Army(5)]
 }
 
-const scoreTable = [];
+let scoreTable = [];
 let bestScore = ['', 0];
 let averageScorePlayed = {};
 
@@ -422,6 +422,7 @@ document.getElementById('turn2').onsubmit = (async function (e) {
     await new Promise(r => setTimeout(r, 100));
 
     bestScore = ['', 0];
+    scoreTable = [];
     averageScorePlayed = {};
 
     let t3f_helper = -1;
@@ -556,6 +557,7 @@ document.getElementById('turn3').onsubmit = (async function (e) {
 
     bestScore = ['', 0];
     averageScorePlayed = {};
+    scoreTable = [];
 
     // Matchs finaux de ce tour = t1o VS t2f, t1f VS t2o.
     // Les armées non choisies retournent dans la pioche. Il reste 4 matchs a décider.
@@ -639,7 +641,7 @@ document.getElementById('turn3').onsubmit = (async function (e) {
         }
     }
 
-    console.log(averageScorePlayed);
+    console.log(averageScorePlayed, scoreTable);
 
     document.getElementById('success_text').hidden = false;
     document.getElementById('t4_tip').innerHTML += `<br>Par conséquent, il est recommandé de jouer l'armée ${friendlyArmies.armyList[parseInt(t4BestPlay[0])].name}<br>`
