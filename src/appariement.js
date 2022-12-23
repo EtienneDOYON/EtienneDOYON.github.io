@@ -48,10 +48,14 @@ function initArmies() {
         document.getElementById(`t2f1_a${i}`).innerHTML = document.getElementById(`friend${i}`).value;
         document.getElementById(`t2f2_a${i}`).innerHTML = document.getElementById(`friend${i}`).value;
         document.getElementById(`t4f_a${i}`).innerHTML = document.getElementById(`friend${i}`).value;
+        document.getElementById(`t5f1_a${i}`).innerHTML = document.getElementById(`friend${i}`).value;
+        document.getElementById(`t5f2_a${i}`).innerHTML = document.getElementById(`friend${i}`).value;
         document.getElementById(`t1_o${i}`).innerHTML = document.getElementById(`oppone${i}`).value;
         document.getElementById(`t2o1_a${i}`).innerHTML = document.getElementById(`oppone${i}`).value;
         document.getElementById(`t2o2_a${i}`).innerHTML = document.getElementById(`oppone${i}`).value;
         document.getElementById(`t4o_a${i}`).innerHTML = document.getElementById(`oppone${i}`).value;
+        document.getElementById(`t5o1_a${i}`).innerHTML = document.getElementById(`oppone${i}`).value;
+        document.getElementById(`t5o2_a${i}`).innerHTML = document.getElementById(`oppone${i}`).value;
     }
 }
 
@@ -410,7 +414,7 @@ document.getElementById('turn2').onsubmit = (async function (e) {
 
     document.getElementById('t2o_a0').innerHTML = document.getElementById('t2o1_a' + t2o1).innerHTML;
     document.getElementById('t2o_a0').value = t2o1;
-    document.getElementById('t2o_a1').innerHTML = document.getElementById('t2o2_a' + t2o2).innerHTML    ;
+    document.getElementById('t2o_a1').innerHTML = document.getElementById('t2o2_a' + t2o2).innerHTML;
     document.getElementById('t2o_a1').value = t2o2;
 
 
@@ -610,7 +614,7 @@ document.getElementById('turn3').onsubmit = (async function (e) {
                                     if (friendlyArmies.armyList[t4f].scoreTable[t5o] < friendlyArmies.armyList[t4f].scoreTable[t6o]
                                         && friendlyArmies.armyList[t4f].scoreTable[t5o] < friendlyArmies.armyList[t4f].scoreTable[t7o]
                                         && friendlyArmies.armyList[t4f].scoreTable[t5o] < friendlyArmies.armyList[t4f].scoreTable[t4o]) {
-                                            continue;
+                                        continue;
                                     }
 
                                     // We finished a fight !!!
@@ -657,4 +661,125 @@ document.getElementById('turn3').onsubmit = (async function (e) {
     document.getElementById('update_result').hidden = true;
     document.getElementById('turn4').hidden = false;
 
+});
+
+document.getElementById('turn4').onsubmit = (async function (e) {
+    e.preventDefault();
+
+    document.getElementById('turn4').hidden = true;
+    document.getElementById('best_matchup').hidden = true;
+    document.getElementById('success_text').hidden = true;
+    document.getElementById('update_result').hidden = false;
+    await new Promise(r => setTimeout(r, 100));
+
+    const t1f = parseInt(document.getElementById('play_t1f').value);
+    const t2f = parseInt(document.getElementById('play_t2f').value);
+    const t4f = parseInt(document.getElementById('play_t4f').value);
+    const t1o = parseInt(document.getElementById('play_t1o').value);
+    const t2o = parseInt(document.getElementById('play_t2o').value);
+    const t4o = parseInt(document.getElementById('play_t4o').value);
+
+    document.getElementById('t5f1_a' + document.getElementById('play_t1f').value).disabled = true;
+    document.getElementById('t5f1_a' + document.getElementById('play_t2f').value).disabled = true;
+    document.getElementById('t5f1_a' + document.getElementById('play_t4f').value).disabled = true;
+    document.getElementById('t5f2_a' + document.getElementById('play_t1f').value).disabled = true;
+    document.getElementById('t5f2_a' + document.getElementById('play_t2f').value).disabled = true;
+    document.getElementById('t5f2_a' + document.getElementById('play_t4f').value).disabled = true;
+    document.getElementById('t5o1_a' + document.getElementById('play_t1o').value).disabled = true;
+    document.getElementById('t5o1_a' + document.getElementById('play_t2o').value).disabled = true;
+    document.getElementById('t5o1_a' + document.getElementById('play_t4o').value).disabled = true;
+    document.getElementById('t5o2_a' + document.getElementById('play_t1o').value).disabled = true;
+    document.getElementById('t5o2_a' + document.getElementById('play_t2o').value).disabled = true;
+    document.getElementById('t5o2_a' + document.getElementById('play_t4o').value).disabled = true;
+
+    bestScore = ['', 0];
+    averageScorePlayed = {};
+    scoreTable = [];
+
+    let t5f1 = -1;
+    while (++t5f1 < 6) {
+        if (t5f1 == t1f || t5f1 == t2f || t5f1 == t4f) continue;
+        let t5f2 = t5f1;
+        while (++t5f2 < 6) {
+            if (t5f2 == t1f || t5f2 == t2f || t5f2 == t4f || t5f2 == t5f1) continue;
+            let t5o1 = -1;
+            while (++t5o1 < 6) {
+                if (t5o1 == t1o || t5o1 == t2o || t5o1 == t4o) continue;
+                let t5o2 = t5o1;
+                while (++t5o2 < 6) {
+                    if (t5o2 == t1o || t5o2 == t2o || t5o2 == t4o || t5o2 == t5o1) continue;
+                    let t5f_helper = -1;
+                    let t5f, t6f, t5o, t6o;
+                    while (++t5f_helper < 2) {
+                        if (t5f_helper == 0) {
+                            t6f = t5f2;
+                            t5f = t5f1;
+                        } else {
+                            t6f = t5f1;
+                            t5f = t5f2;
+                        }
+                        let t5o_helper = -1;
+                        while (++t5o_helper < 2) {
+                            if (t5o_helper == 0) {
+                                t6o = t5o2;
+                                t5o = t5o1;
+                            } else {
+                                t6o = t5o1;
+                                t5o = t5o2;
+                            }
+
+                            let t7f = 0;
+                            let t7o = 0;
+
+                            while (t7f == t1f || t7f == t2f || t7f == t4f || t7f == t5f || t7f == t6f) t7f++;
+                            while (t7o == t1o || t7o == t2o || t7o == t4o || t7o == t5o || t7o == t6o) t7o++;
+
+                            if (friendlyArmies.armyList[t4f].scoreTable[t5o] < friendlyArmies.armyList[t4f].scoreTable[t6o]
+                                && friendlyArmies.armyList[t4f].scoreTable[t5o] < friendlyArmies.armyList[t4f].scoreTable[t7o]
+                                && friendlyArmies.armyList[t4f].scoreTable[t5o] < friendlyArmies.armyList[t4f].scoreTable[t4o]) {
+                                continue;
+                            }
+
+                            // We finished a fight !!!
+                            let totalScore = parseInt(friendlyArmies.armyList[t1f].scoreTable[t2o]);
+                            totalScore += parseInt(friendlyArmies.armyList[t2f].scoreTable[t1o]);
+                            totalScore += parseInt(friendlyArmies.armyList[t4f].scoreTable[t5o]);
+                            totalScore += parseInt(friendlyArmies.armyList[t5f].scoreTable[t4o]);
+                            totalScore += parseInt(friendlyArmies.armyList[t6f].scoreTable[t6o]);
+                            totalScore += parseInt(friendlyArmies.armyList[t7f].scoreTable[t7o]);
+                            const newVal = [`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t6f}${t6o};${t7f}${t7o}`, totalScore];
+                            scoreTable.push(newVal);
+
+                            if (!averageScorePlayed[t5f1.toString() + t5f2.toString()]) {
+                                averageScorePlayed[t5f1.toString() + t5f2.toString()] = 0;
+                            }
+                            averageScorePlayed[t5f1.toString() + t5f2.toString()] += totalScore;
+
+                            if (bestScore[1] < totalScore) bestScore = newVal;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    let t5BestResult = 0;
+    let t5BestPlay = "";
+    for (const key in averageScorePlayed) {
+        if (averageScorePlayed[key] > t5BestResult) {
+            t5BestResult = averageScorePlayed[key];
+            t5BestPlay = key;
+        }
+    }
+
+    console.log(averageScorePlayed);
+
+    document.getElementById('t5_tip').innerHTML = `Il est donc recommandé de jouer les armées suivantes  : <br>- ${friendlyArmies.armyList[parseInt(t5BestPlay[0])].name}<br>- ${friendlyArmies.armyList[parseInt(t5BestPlay[1])].name}<br>`;
+
+    document.getElementById('best_matchup').innerHTML = `Meilleurs matchs : <br>${dataToString(bestScore[0])}<br>Score total : ${bestScore[1]}`;
+
+    document.getElementById('best_matchup').hidden = false;
+    document.getElementById('success_text').hidden = false;
+    document.getElementById('update_result').hidden = true;
+    document.getElementById('turn5').hidden = false;
 });
