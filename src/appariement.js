@@ -403,14 +403,14 @@ document.getElementById('turn2').onsubmit = (async function (e) {
     }
 
     // Update les choix possibles à l'étape suivante
-    document.getElementById('t2f_a0').innerHTML = document.getElementById('play_t2f1').innerHTML;
+    document.getElementById('t2f_a0').innerHTML = document.getElementById('t2f1_a' + t2f1).innerHTML;
     document.getElementById('t2f_a0').value = t2f1;
-    document.getElementById('t2f_a1').innerHTML = document.getElementById('play_t2f2').innerHTML;
+    document.getElementById('t2f_a1').innerHTML = document.getElementById('t2f2_a' + t2f2).innerHTML;
     document.getElementById('t2f_a1').value = t2f2;
 
-    document.getElementById('t2o_a0').innerHTML = document.getElementById('play_t2o1').innerHTML;
+    document.getElementById('t2o_a0').innerHTML = document.getElementById('t2o1_a' + t2o1).innerHTML;
     document.getElementById('t2o_a0').value = t2o1;
-    document.getElementById('t2o_a1').innerHTML = document.getElementById('play_t2o2').innerHTML    ;
+    document.getElementById('t2o_a1').innerHTML = document.getElementById('t2o2_a' + t2o2).innerHTML    ;
     document.getElementById('t2o_a1').value = t2o2;
 
 
