@@ -804,15 +804,15 @@ document.getElementById('turn5').onsubmit = (async function (e) {
 
 
 
-    document.getElementById('t5f_a0').innerHTML = document.getElementById('t5f1_a' + t2f1).innerHTML;
-    document.getElementById('t5f_a0').value = t2f1;
-    document.getElementById('t5f_a1').innerHTML = document.getElementById('t5f2_a' + t2f2).innerHTML;
-    document.getElementById('t5f_a1').value = t2f2;
+    document.getElementById('t5f_a0').innerHTML = document.getElementById('t5f1_a' + t5f1).innerHTML;
+    document.getElementById('t5f_a0').value = t5f1;
+    document.getElementById('t5f_a1').innerHTML = document.getElementById('t5f2_a' + t5f2).innerHTML;
+    document.getElementById('t5f_a1').value = t5f2;
 
-    document.getElementById('t5o_a0').innerHTML = document.getElementById('t5o1_a' + t2o1).innerHTML;
-    document.getElementById('t5o_a0').value = t2o1;
-    document.getElementById('t5o_a1').innerHTML = document.getElementById('t5o2_a' + t2o2).innerHTML;
-    document.getElementById('t5o_a1').value = t2o2;
+    document.getElementById('t5o_a0').innerHTML = document.getElementById('t5o1_a' + t5o1).innerHTML;
+    document.getElementById('t5o_a0').value = t5o1;
+    document.getElementById('t5o_a1').innerHTML = document.getElementById('t5o2_a' + t5o2).innerHTML;
+    document.getElementById('t5o_a1').value = t5o2;
 
     bestScore = ['', 0];
     averageScorePlayed = {};
