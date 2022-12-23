@@ -651,8 +651,6 @@ document.getElementById('turn3').onsubmit = (async function (e) {
         }
     }
 
-    console.log(averageScorePlayed, scoreTable);
-
     document.getElementById('success_text').hidden = false;
     document.getElementById('t4_tip').innerHTML += `<br>Par conséquent, il est recommandé de jouer l'armée ${friendlyArmies.armyList[parseInt(t4BestPlay[0])].name}<br>`
     document.getElementById('best_matchup').innerHTML = `Meilleurs matchs : <br>${dataToString(bestScore[0])}<br>Score total : ${bestScore[1]}`;
@@ -772,7 +770,6 @@ document.getElementById('turn4').onsubmit = (async function (e) {
         }
     }
 
-    console.log(averageScorePlayed);
 
     document.getElementById('t5_tip').innerHTML = `Il est donc recommandé de jouer les armées suivantes  : <br>- ${friendlyArmies.armyList[parseInt(t5BestPlay[0])].name}<br>- ${friendlyArmies.armyList[parseInt(t5BestPlay[1])].name}<br>`;
 
@@ -783,3 +780,107 @@ document.getElementById('turn4').onsubmit = (async function (e) {
     document.getElementById('update_result').hidden = true;
     document.getElementById('turn5').hidden = false;
 });
+
+document.getElementById('turn5').onsubmit = (async function (e) {
+    e.preventDefault();
+
+    document.getElementById('turn5').hidden = true;
+    document.getElementById('best_matchup').hidden = true;
+    document.getElementById('success_text').hidden = true;
+    document.getElementById('update_result').hidden = false;
+    await new Promise(r => setTimeout(r, 100));
+
+    const t1f = parseInt(document.getElementById('play_t1f').value);
+    const t2f = parseInt(document.getElementById('play_t2f').value);
+    const t4f = parseInt(document.getElementById('play_t4f').value);
+    const t1o = parseInt(document.getElementById('play_t1o').value);
+    const t2o = parseInt(document.getElementById('play_t2o').value);
+    const t4o = parseInt(document.getElementById('play_t4o').value);
+
+    const t5f1 = parseInt(document.getElementById('play_t5f1').value);
+    const t5f2 = parseInt(document.getElementById('play_t5f2').value);
+    const t5o1 = parseInt(document.getElementById('play_t5o1').value);
+    const t5o2 = parseInt(document.getElementById('play_t5o2').value);
+
+
+
+    document.getElementById('t5f_a0').innerHTML = document.getElementById('t5f1_a' + t2f1).innerHTML;
+    document.getElementById('t5f_a0').value = t2f1;
+    document.getElementById('t5f_a1').innerHTML = document.getElementById('t5f2_a' + t2f2).innerHTML;
+    document.getElementById('t5f_a1').value = t2f2;
+
+    document.getElementById('t5o_a0').innerHTML = document.getElementById('t5o1_a' + t2o1).innerHTML;
+    document.getElementById('t5o_a0').value = t2o1;
+    document.getElementById('t5o_a1').innerHTML = document.getElementById('t5o2_a' + t2o2).innerHTML;
+    document.getElementById('t5o_a1').value = t2o2;
+
+    bestScore = ['', 0];
+    averageScorePlayed = {};
+    scoreTable = [];
+
+    let t5f_helper = -1;
+    let t5f, t6f, t5o, t6o;
+    while (++t5f_helper < 2) {
+        if (t5f_helper == 0) {
+            t6f = t5f2;
+            t5f = t5f1;
+        } else {
+            t6f = t5f1;
+            t5f = t5f2;
+        }
+        let t5o_helper = -1;
+        while (++t5o_helper < 2) {
+            if (t5o_helper == 0) {
+                t6o = t5o2;
+                t5o = t5o1;
+            } else {
+                t6o = t5o1;
+                t5o = t5o2;
+            }
+
+            let t7f = 0;
+            let t7o = 0;
+
+            while (t7f == t1f || t7f == t2f || t7f == t4f || t7f == t5f || t7f == t6f) t7f++;
+            while (t7o == t1o || t7o == t2o || t7o == t4o || t7o == t5o || t7o == t6o) t7o++;
+
+            // We finished a fight !!!
+            let totalScore = parseInt(friendlyArmies.armyList[t1f].scoreTable[t2o]);
+            totalScore += parseInt(friendlyArmies.armyList[t2f].scoreTable[t1o]);
+            totalScore += parseInt(friendlyArmies.armyList[t4f].scoreTable[t5o]);
+            totalScore += parseInt(friendlyArmies.armyList[t5f].scoreTable[t4o]);
+            totalScore += parseInt(friendlyArmies.armyList[t6f].scoreTable[t6o]);
+            totalScore += parseInt(friendlyArmies.armyList[t7f].scoreTable[t7o]);
+            const newVal = [`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t6f}${t6o};${t7f}${t7o}`, totalScore];
+            scoreTable.push(newVal);
+
+            if (!averageScorePlayed[t5o.toString()]) {
+                averageScorePlayed[t5o.toString()] = 0;
+            }
+            averageScorePlayed[t5o.toString()] += totalScore;
+
+            if (bestScore[1] < totalScore) bestScore = newVal;
+        }
+    }
+
+    let t6BestResult = 0;
+    let t6BestPlay = "";
+    for (const key in averageScorePlayed) {
+        if (averageScorePlayed[key] > t6BestResult) {
+            t6BestResult = averageScorePlayed[key];
+            t6BestPlay = key;
+        }
+    }
+
+    console.log(averageScorePlayed);
+
+    document.getElementById('t6_tip').innerHTML = `Vous devriez donc choisir de combattre l'armée ${opponentArmies.armyList[parseInt(t2BestPlay[0])].name}<br>`;
+
+    document.getElementById('best_matchup').innerHTML = `Meilleurs matchs : <br>${dataToString(bestScore[0])}<br>Score total : ${bestScore[1]}`;
+
+    document.getElementById('best_matchup').hidden = false;
+    document.getElementById('success_text').hidden = false;
+    document.getElementById('update_result').hidden = true;
+    document.getElementById('turn6').hidden = false;
+});
+
