@@ -500,6 +500,7 @@ document.getElementById('turn2').onsubmit = (async function (e) {
         }
     }
 
+    console.log(averageScorePlayed);
     document.getElementById('success_text').hidden = false;
 
     document.getElementById('best_matchup').innerHTML = `Meilleurs matchs : <br>${dataToString(bestScore[0])}<br>Score total : ${bestScore[1]}`;
