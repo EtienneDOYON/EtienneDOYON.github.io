@@ -191,7 +191,33 @@
         </div>
     </form>
 
+    <form name="turn3" id="turn3" hidden>
+        <div id="t3_tip">
+            
+        </div>
 
+        <div>
+            <p>Quelle armée vous choisissez ? :</p>
+            <select name="play_t2o" id="play_t2o" required class="armySelect">
+                <option id="default" value="" disabled selected>Votre choix</option>
+                <option id="t2o_a0" value="7"></option>
+                <option id="t2o_a1" value="8"></option>
+            </select>
+            <br>
+
+            <p>Quelle armée votre adversaire choisit ? :</p>
+            <select name="play_t2f" id="play_t2f" required class="armySelect">
+                <option id="default" value="" disabled selected>Choix adverse</option>
+                <option id="t2f_a0" value="7"></option>
+                <option id="t2f_a1" value="8"></option>
+            </select>
+
+            <input class="next-step" type="submit" value="Valider la sélection">
+        </div>
+    </form>
+
+
+    
 
     <script src="src/appariement.js"></script>
 </body>

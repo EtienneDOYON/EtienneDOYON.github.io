@@ -400,6 +400,18 @@ document.getElementById('turn2').onsubmit = (async function (e) {
         return;
     }
 
+    // Update les choix possibles à l'étape suivante
+    document.getElementById('t2f_a0').innerHTML = document.getElementById('play_t2f1').value;
+    document.getElementById('t2f_a0').value = t2f1;
+    document.getElementById('t2f_a1').innerHTML = document.getElementById('play_t2f2').value;
+    document.getElementById('t2f_a1').value = t2f2;
+
+    document.getElementById('t2o_a0').innerHTML = document.getElementById('play_t2o1').value;
+    document.getElementById('t2o_a0').value = t2o1;
+    document.getElementById('t2o_a1').innerHTML = document.getElementById('play_t2o2').value;
+    document.getElementById('t2o_a1').value = t2o2;
+
+
     document.getElementById('t2-error-message').hidden = true;
     document.getElementById('turn2').hidden = true;
     document.getElementById('best_matchup').hidden = true;
@@ -483,10 +495,10 @@ document.getElementById('turn2').onsubmit = (async function (e) {
                                             const newVal = [`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t6f}${t6o};${t7f}${t7o}`, totalScore];
                                             scoreTable.push(newVal);
 
-                                            if (!averageScorePlayed[t2f.toString()]) {
-                                                averageScorePlayed[t2f.toString()] = 0;
+                                            if (!averageScorePlayed[t2o.toString()]) {
+                                                averageScorePlayed[t2o.toString()] = 0;
                                             }
-                                            averageScorePlayed[t2f.toString()] += totalScore;
+                                            averageScorePlayed[t2o.toString()] += totalScore;
 
                                             if (bestScore[1] < totalScore) bestScore = newVal;
                                         }
@@ -500,10 +512,131 @@ document.getElementById('turn2').onsubmit = (async function (e) {
         }
     }
 
+    let t2BestResult = 0;
+    let t2BestPlay = "";
+
+    for (const key in averageScorePlayed) {
+        if (averageScorePlayed[key] > t2BestResult) {
+            t2BestResult = averageScorePlayed[key];
+            t2BestPlay = key;
+        }
+    }
+
     console.log(averageScorePlayed);
+    document.getElementById('success_text').hidden = false;
+
+    document.getElementById('t3_tip').innerHTML = `Vous devriez donc choisir de combattre l'armée ${opponentArmies.armyList[parseInt(t2BestPlay[0])].name}<br>`;
+
+    document.getElementById('best_matchup').innerHTML = `Meilleurs matchs : <br>${dataToString(bestScore[0])}<br>Score total : ${bestScore[1]}`;
+
+    document.getElementById('best_matchup').hidden = false;
+    document.getElementById('update_result').hidden = true;
+    document.getElementById('turn3').hidden = false;
+});
+
+document.getElementById('turn3').onsubmit = (async function (e) {
+    e.preventDefault();
+
+    document.getElementById('turn3').hidden = true;
+    document.getElementById('best_matchup').hidden = true;
+    document.getElementById('success_text').hidden = true;
+    document.getElementById('update_result').hidden = false;
+    await new Promise(r => setTimeout(r, 100));
+
+    const t1f = parseInt(document.getElementById('play_t1f').value);
+    const t2f1 = parseInt(document.getElementById('play_t2f1').value);
+    const t2f2 = parseInt(document.getElementById('play_t2f2').value);
+    const t2f = parseInt(document.getElementById('play_t2f').value);
+    const t1o = parseInt(document.getElementById('play_t1o').value);
+    const t2o1 = parseInt(document.getElementById('play_t2o1').value);
+    const t2o2 = parseInt(document.getElementById('play_t2o2').value);
+    const t2o = parseInt(document.getElementById('play_t2o').value);
+
+    bestScore = ['', 0];
+    averageScorePlayed = {};
+
+    // Matchs finaux de ce tour = t1o VS t2f, t1f VS t2o.
+    // Les armées non choisies retournent dans la pioche. Il reste 4 matchs a décider.
+    let t4f = -1;
+    while (++t4f < 6) {
+        if (t4f == t1f || t4f == t2f) continue;
+        // t4f face cachée
+        let t4o = -1;
+        while (++t4o < 6) {
+            if (t4o == t1o || t4o == t2o) continue;
+            // t4o face cachée
+            let t5f1 = -1;
+            while (++t5f1 < 6) {
+                if (t5f1 == t1f || t5f1 == t2f || t5f1 == t4f) continue;
+                let t5f2 = -1;
+                while (++t5f2 < 6) {
+                    if (t5f2 == t1f || t5f2 == t2f || t5f2 == t4f || t5f2 == t5f1) continue;
+                    let t5o1 = -1;
+                    while (++t5o1 < 6) {
+                        if (t5o1 == t1o || t5o1 == t2o || t5o1 == t4o) continue;
+                        let t5o2 = -1;
+                        while (++t5o2 < 6) {
+                            if (t5o2 == t1o || t5o2 == t2o || t5o2 == t4o || t5o2 == t5o1) continue;
+                            let t5f_helper = -1;
+                            let t5f, t6f, t5o, t6o;
+                            while (++t5f_helper < 2) {
+                                if (t5f_helper == 0) {
+                                    t6f = t5f2;
+                                    t5f = t5f1;
+                                } else {
+                                    t6f = t5f1;
+                                    t5f = t5f2;
+                                }
+                                let t5o_helper = -1;
+                                while (++t5o_helper < 2) {
+                                    if (t5o_helper == 0) {
+                                        t6o = t5o2;
+                                        t5o = t5o1;
+                                    } else {
+                                        t6o = t5o1;
+                                        t5o = t5o2;
+                                    }
+
+                                    let t7f = 0;
+                                    let t7o = 0;
+
+                                    while (t7f == t1f || t7f == t2f || t7f == t4f || t7f == t5f || t7f == t6f) t7f++;
+                                    while (t7o == t1o || t7o == t2o || t7o == t4o || t7o == t5o || t7o == t6o) t7o++;
+
+                                    // We finished a fight !!!
+                                    let totalScore = parseInt(friendlyArmies.armyList[t1f].scoreTable[t2o]);
+                                    totalScore += parseInt(friendlyArmies.armyList[t2f].scoreTable[t1o]);
+                                    totalScore += parseInt(friendlyArmies.armyList[t4f].scoreTable[t5o]);
+                                    totalScore += parseInt(friendlyArmies.armyList[t5f].scoreTable[t4o]);
+                                    totalScore += parseInt(friendlyArmies.armyList[t6f].scoreTable[t6o]);
+                                    totalScore += parseInt(friendlyArmies.armyList[t7f].scoreTable[t7o]);
+                                    const newVal = [`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t6f}${t6o};${t7f}${t7o}`, totalScore];
+                                    scoreTable.push(newVal);
+
+                                    if (!averageScorePlayed[t4f.toString()]) {
+                                        averageScorePlayed[t4f.toString()] = 0;
+                                    }
+                                    averageScorePlayed[t4f.toString()] += totalScore;
+
+                                    if (bestScore[1] < totalScore) bestScore = newVal;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    console.log(averageScorePlayed);
+
+    document.getElementById('best_matchup').innerHTML = `Meilleurs matchs : <br>${dataToString(bestScore[0])}<br>Score total : ${bestScore[1]}`;
+
     document.getElementById('success_text').hidden = false;
 
     document.getElementById('best_matchup').innerHTML = `Meilleurs matchs : <br>${dataToString(bestScore[0])}<br>Score total : ${bestScore[1]}`;
 
-    
+    document.getElementById('best_matchup').hidden = false;
+    document.getElementById('update_result').hidden = true;
+
 });
