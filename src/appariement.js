@@ -49,6 +49,8 @@ function initArmies() {
         document.getElementById(`t2f1_a${i}`).innerHTML = document.getElementById(`friend${i}`).value;
         document.getElementById(`t2f2_a${i}`).innerHTML = document.getElementById(`friend${i}`).value;
         document.getElementById(`t1_o${i}`).innerHTML = document.getElementById(`oppone${i}`).value;
+        document.getElementById(`t2o1_a${i}`).innerHTML = document.getElementById(`oppone${i}`).value;
+        document.getElementById(`t2o2_a${i}`).innerHTML = document.getElementById(`oppone${i}`).value;
     }
 }
 
@@ -243,6 +245,7 @@ document.getElementById('turn1').onsubmit = (async function (e) {
     e.preventDefault();
     document.getElementById('turn1').hidden = true;
     document.getElementById('best_matchup').hidden = true;
+    document.getElementById('success_text').hidden = true;
     document.getElementById('update_result').hidden = false;
     await new Promise(r => setTimeout(r, 100));
 
@@ -252,6 +255,8 @@ document.getElementById('turn1').onsubmit = (async function (e) {
     // Impossible de choisir les armées qui ont déjà été jouées
     document.getElementById('t2f1_a' + document.getElementById('play_t1f').value).disabled = true;
     document.getElementById('t2f2_a' + document.getElementById('play_t1f').value).disabled = true;
+    document.getElementById('t2o1_a' + document.getElementById('play_t1o').value).disabled = true;
+    document.getElementById('t2o2_a' + document.getElementById('play_t1o').value).disabled = true;
 
     let t2f1 = -1;
     while (++t2f1 < 6) {
