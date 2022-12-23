@@ -47,9 +47,11 @@ function initArmies() {
         document.getElementById(`t1_a${i}`).innerHTML = document.getElementById(`friend${i}`).value;
         document.getElementById(`t2f1_a${i}`).innerHTML = document.getElementById(`friend${i}`).value;
         document.getElementById(`t2f2_a${i}`).innerHTML = document.getElementById(`friend${i}`).value;
+        document.getElementById(`t4f_a${i}`).innerHTML = document.getElementById(`friend${i}`).value;
         document.getElementById(`t1_o${i}`).innerHTML = document.getElementById(`oppone${i}`).value;
         document.getElementById(`t2o1_a${i}`).innerHTML = document.getElementById(`oppone${i}`).value;
         document.getElementById(`t2o2_a${i}`).innerHTML = document.getElementById(`oppone${i}`).value;
+        document.getElementById(`t4o_a${i}`).innerHTML = document.getElementById(`oppone${i}`).value;
     }
 }
 
@@ -401,14 +403,14 @@ document.getElementById('turn2').onsubmit = (async function (e) {
     }
 
     // Update les choix possibles à l'étape suivante
-    document.getElementById('t2f_a0').innerHTML = document.getElementById('play_t2f1').value;
+    document.getElementById('t2f_a0').innerHTML = document.getElementById('play_t2f1').innerHTML;
     document.getElementById('t2f_a0').value = t2f1;
-    document.getElementById('t2f_a1').innerHTML = document.getElementById('play_t2f2').value;
+    document.getElementById('t2f_a1').innerHTML = document.getElementById('play_t2f2').innerHTML;
     document.getElementById('t2f_a1').value = t2f2;
 
-    document.getElementById('t2o_a0').innerHTML = document.getElementById('play_t2o1').value;
+    document.getElementById('t2o_a0').innerHTML = document.getElementById('play_t2o1').innerHTML;
     document.getElementById('t2o_a0').value = t2o1;
-    document.getElementById('t2o_a1').innerHTML = document.getElementById('play_t2o2').value;
+    document.getElementById('t2o_a1').innerHTML = document.getElementById('play_t2o2').innerHTML    ;
     document.getElementById('t2o_a1').value = t2o2;
 
 
@@ -522,7 +524,6 @@ document.getElementById('turn2').onsubmit = (async function (e) {
         }
     }
 
-    console.log(averageScorePlayed);
     document.getElementById('success_text').hidden = false;
 
     document.getElementById('t3_tip').innerHTML = `Vous devriez donc choisir de combattre l'armée ${opponentArmies.armyList[parseInt(t2BestPlay[0])].name}<br>`;
@@ -544,13 +545,14 @@ document.getElementById('turn3').onsubmit = (async function (e) {
     await new Promise(r => setTimeout(r, 100));
 
     const t1f = parseInt(document.getElementById('play_t1f').value);
-    const t2f1 = parseInt(document.getElementById('play_t2f1').value);
-    const t2f2 = parseInt(document.getElementById('play_t2f2').value);
     const t2f = parseInt(document.getElementById('play_t2f').value);
     const t1o = parseInt(document.getElementById('play_t1o').value);
-    const t2o1 = parseInt(document.getElementById('play_t2o1').value);
-    const t2o2 = parseInt(document.getElementById('play_t2o2').value);
     const t2o = parseInt(document.getElementById('play_t2o').value);
+
+    document.getElementById('t4f_a' + document.getElementById('play_t1f').value).disabled = true;
+    document.getElementById('t4f_a' + document.getElementById('play_t2f').value).disabled = true;
+    document.getElementById('t4o_a' + document.getElementById('play_t1o').value).disabled = true;
+    document.getElementById('t4o_a' + document.getElementById('play_t2o').value).disabled = true;
 
     bestScore = ['', 0];
     averageScorePlayed = {};
@@ -628,15 +630,23 @@ document.getElementById('turn3').onsubmit = (async function (e) {
         }
     }
 
+    let t4BestResult = 0;
+    let t4BestPlay = "";
+    for (const key in averageScorePlayed) {
+        if (averageScorePlayed[key] > t4BestResult) {
+            t4BestResult = averageScorePlayed[key];
+            t4BestPlay = key;
+        }
+    }
+
     console.log(averageScorePlayed);
 
-    document.getElementById('best_matchup').innerHTML = `Meilleurs matchs : <br>${dataToString(bestScore[0])}<br>Score total : ${bestScore[1]}`;
-
     document.getElementById('success_text').hidden = false;
-
+    document.getElementById('t4_tip').innerHTML += `<br>Par conséquent, il est recommandé de jouer l'armée ${friendlyArmies.armyList[parseInt(t4BestPlay[0])].name}<br>`
     document.getElementById('best_matchup').innerHTML = `Meilleurs matchs : <br>${dataToString(bestScore[0])}<br>Score total : ${bestScore[1]}`;
 
     document.getElementById('best_matchup').hidden = false;
     document.getElementById('update_result').hidden = true;
+    document.getElementById('turn4').hidden = false;
 
 });

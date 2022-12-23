@@ -212,12 +212,49 @@
                 <option id="t2f_a1" value="8"></option>
             </select>
 
+            <br>
+
+            <input class="next-step" type="submit" value="Valider la sélection">
+        </div>
+    </form>
+
+    <form name="turn4" id="turn4" hidden>
+        <div id="t4_tip">
+            
+        </div>
+
+        <div>
+            <p>Quelle armée placez-vous face cachée ? :</p>
+            <select name="play_t4f" id="play_t4f" required class="armySelect">
+                <option id="default" value="" disabled selected>Votre armée</option>
+                <option id="t4f_a0" value="0"></option>
+                <option id="t4f_a1" value="1"></option>
+                <option id="t4f_a2" value="2"></option>
+                <option id="t4f_a3" value="3"></option>
+                <option id="t4f_a4" value="4"></option>
+                <option id="t4f_a5" value="5"></option>
+            </select>
+            <br>
+
+            <p>Quelle armée votre adversaire viens de placer face cachée ? :</p>
+            <select name="play_t4o" id="play_t4o" required class="armySelect">
+                <option id="default" value="" disabled selected>Armée adverse</option>
+                <option id="t4o_a0" value="0"></option>
+                <option id="t4o_a1" value="1"></option>
+                <option id="t4o_a2" value="2"></option>
+                <option id="t4o_a3" value="3"></option>
+                <option id="t4o_a4" value="4"></option>
+                <option id="t4o_a5" value="5"></option>
+            </select>
+
+            <br>
+
             <input class="next-step" type="submit" value="Valider la sélection">
         </div>
     </form>
 
 
-    
+
 
     <script src="src/appariement.js"></script>
 </body>
