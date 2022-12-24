@@ -885,6 +885,8 @@ document.getElementById('turn5').onsubmit = (async function (e) {
 });
 
 document.getElementById('turn6').onsubmit = (async function (e) {
+    document.getElementById('turn6').hidden = true;
+
     e.preventDefault();
 
     bestScore = ['', 0];
@@ -928,6 +930,6 @@ document.getElementById('turn6').onsubmit = (async function (e) {
     document.getElementById('best_matchup').hidden = true;
     document.getElementById('success_text').hidden = true;
 
-    document.getElementById('final_result').innerHTML = `Voici les matchs du round : <br>${dataToString(`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t6f}${t6o};${t7f}${t7o}`)}<br>Score total : ${totalScore}`;
+    document.getElementById('final_result').innerHTML = `Voici les matchs du round : <br>${dataToString(`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t6f}${t6o};${t7f}${t7o}`)}<br>Score total attendu : ${totalScore}<br><br>Pour relancer une simulation, rechargez la page.<br>Bon match !`;
     document.getElementById('final_result').hidden = false;
 });
