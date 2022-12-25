@@ -206,9 +206,9 @@ document.getElementById('score_list').onsubmit = (async function (e) {
                                                             totalScore += parseInt(friendlyArmies.armyList[t2f].scoreTable[t1o]);
                                                             totalScore += parseInt(friendlyArmies.armyList[t4f].scoreTable[t5o]);
                                                             totalScore += parseInt(friendlyArmies.armyList[t5f].scoreTable[t4o]);
-                                                            totalScore += parseInt(friendlyArmies.armyList[t6f].scoreTable[t6o]);
-                                                            totalScore += parseInt(friendlyArmies.armyList[t7f].scoreTable[t7o]);
-                                                            const newVal = [`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t6f}${t6o};${t7f}${t7o}`, totalScore];
+                                                            totalScore += parseInt(friendlyArmies.armyList[t7f].scoreTable[t6o]);
+                                                            totalScore += parseInt(friendlyArmies.armyList[t6f].scoreTable[t7o]);
+                                                            const newVal = [`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t7f}${t6o};${t6f}${t7o}`, totalScore];
                                                             scoreTable.push(newVal);
 
                                                             if (bestScore[1] < totalScore) bestScore = newVal;
@@ -342,9 +342,9 @@ document.getElementById('turn1').onsubmit = (async function (e) {
                                                             totalScore += parseInt(friendlyArmies.armyList[t2f].scoreTable[t1o]);
                                                             totalScore += parseInt(friendlyArmies.armyList[t4f].scoreTable[t5o]);
                                                             totalScore += parseInt(friendlyArmies.armyList[t5f].scoreTable[t4o]);
-                                                            totalScore += parseInt(friendlyArmies.armyList[t6f].scoreTable[t6o]);
-                                                            totalScore += parseInt(friendlyArmies.armyList[t7f].scoreTable[t7o]);
-                                                            const newVal = [`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t6f}${t6o};${t7f}${t7o}`, totalScore];
+                                                            totalScore += parseInt(friendlyArmies.armyList[t7f].scoreTable[t6o]);
+                                                            totalScore += parseInt(friendlyArmies.armyList[t6f].scoreTable[t7o]);
+                                                            const newVal = [`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t7f}${t6o};${t6f}${t7o}`, totalScore];
                                                             scoreTable.push(newVal);
 
                                                             if (!averageScorePlayed[t2f1.toString() + t2f2.toString()]) {
@@ -497,9 +497,9 @@ document.getElementById('turn2').onsubmit = (async function (e) {
                                             totalScore += parseInt(friendlyArmies.armyList[t2f].scoreTable[t1o]);
                                             totalScore += parseInt(friendlyArmies.armyList[t4f].scoreTable[t5o]);
                                             totalScore += parseInt(friendlyArmies.armyList[t5f].scoreTable[t4o]);
-                                            totalScore += parseInt(friendlyArmies.armyList[t6f].scoreTable[t6o]);
-                                            totalScore += parseInt(friendlyArmies.armyList[t7f].scoreTable[t7o]);
-                                            const newVal = [`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t6f}${t6o};${t7f}${t7o}`, totalScore];
+                                            totalScore += parseInt(friendlyArmies.armyList[t7f].scoreTable[t6o]);
+                                            totalScore += parseInt(friendlyArmies.armyList[t6f].scoreTable[t7o]);
+                                            const newVal = [`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t7f}${t6o};${t6f}${t7o}`, totalScore];
                                             scoreTable.push(newVal);
 
                                             if (!averageScorePlayed[t2o.toString()]) {
@@ -622,9 +622,9 @@ document.getElementById('turn3').onsubmit = (async function (e) {
                                     totalScore += parseInt(friendlyArmies.armyList[t2f].scoreTable[t1o]);
                                     totalScore += parseInt(friendlyArmies.armyList[t4f].scoreTable[t5o]);
                                     totalScore += parseInt(friendlyArmies.armyList[t5f].scoreTable[t4o]);
-                                    totalScore += parseInt(friendlyArmies.armyList[t6f].scoreTable[t6o]);
-                                    totalScore += parseInt(friendlyArmies.armyList[t7f].scoreTable[t7o]);
-                                    const newVal = [`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t6f}${t6o};${t7f}${t7o}`, totalScore];
+                                    totalScore += parseInt(friendlyArmies.armyList[t7f].scoreTable[t6o]);
+                                    totalScore += parseInt(friendlyArmies.armyList[t6f].scoreTable[t7o]);
+                                    const newVal = [`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t7f}${t6o};${t6f}${t7o}`, totalScore];
                                     scoreTable.push(newVal);
 
                                     if (!averageScorePlayed[t4f.toString()]) {
@@ -743,9 +743,9 @@ document.getElementById('turn4').onsubmit = (async function (e) {
                             totalScore += parseInt(friendlyArmies.armyList[t2f].scoreTable[t1o]);
                             totalScore += parseInt(friendlyArmies.armyList[t4f].scoreTable[t5o]);
                             totalScore += parseInt(friendlyArmies.armyList[t5f].scoreTable[t4o]);
-                            totalScore += parseInt(friendlyArmies.armyList[t6f].scoreTable[t6o]);
-                            totalScore += parseInt(friendlyArmies.armyList[t7f].scoreTable[t7o]);
-                            const newVal = [`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t6f}${t6o};${t7f}${t7o}`, totalScore];
+                            totalScore += parseInt(friendlyArmies.armyList[t7f].scoreTable[t6o]);
+                            totalScore += parseInt(friendlyArmies.armyList[t6f].scoreTable[t7o]);
+                            const newVal = [`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t7f}${t6o};${t6f}${t7o}`, totalScore];
                             scoreTable.push(newVal);
 
                             if (!averageScorePlayed[t5f1.toString() + t5f2.toString()]) {
@@ -849,9 +849,9 @@ document.getElementById('turn5').onsubmit = (async function (e) {
             totalScore += parseInt(friendlyArmies.armyList[t2f].scoreTable[t1o]);
             totalScore += parseInt(friendlyArmies.armyList[t4f].scoreTable[t5o]);
             totalScore += parseInt(friendlyArmies.armyList[t5f].scoreTable[t4o]);
-            totalScore += parseInt(friendlyArmies.armyList[t6f].scoreTable[t6o]);
-            totalScore += parseInt(friendlyArmies.armyList[t7f].scoreTable[t7o]);
-            const newVal = [`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t6f}${t6o};${t7f}${t7o}`, totalScore];
+            totalScore += parseInt(friendlyArmies.armyList[t7f].scoreTable[t6o]);
+            totalScore += parseInt(friendlyArmies.armyList[t6f].scoreTable[t7o]);
+            const newVal = [`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t7f}${t6o};${t6f}${t7o}`, totalScore];
             scoreTable.push(newVal);
 
             if (!averageScorePlayed[t5o.toString()]) {
@@ -923,13 +923,13 @@ document.getElementById('turn6').onsubmit = (async function (e) {
     totalScore += parseInt(friendlyArmies.armyList[t2f].scoreTable[t1o]);
     totalScore += parseInt(friendlyArmies.armyList[t4f].scoreTable[t5o]);
     totalScore += parseInt(friendlyArmies.armyList[t5f].scoreTable[t4o]);
-    totalScore += parseInt(friendlyArmies.armyList[t6f].scoreTable[t6o]);
-    totalScore += parseInt(friendlyArmies.armyList[t7f].scoreTable[t7o]);
+    totalScore += parseInt(friendlyArmies.armyList[t7f].scoreTable[t6o]);
+    totalScore += parseInt(friendlyArmies.armyList[t6f].scoreTable[t7o]);
 
     document.getElementById('turn5').hidden = true;
     document.getElementById('best_matchup').hidden = true;
     document.getElementById('success_text').hidden = true;
 
-    document.getElementById('final_result').innerHTML = `Voici les matchs du round : <br>${dataToString(`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t6f}${t6o};${t7f}${t7o}`)}<br>Score total attendu : ${totalScore}<br><br>Pour relancer une simulation, rechargez la page.<br>Bon match !`;
+    document.getElementById('final_result').innerHTML = `Voici les matchs du round : <br>${dataToString(`${t1f}${t2o};${t2f}${t1o};${t4f}${t5o};${t5f}${t4o};${t7f}${t6o};${t6f}${t7o}`)}<br>Score total attendu : ${totalScore}<br><br>Pour relancer une simulation, rechargez la page.<br>Bon match !`;
     document.getElementById('final_result').hidden = false;
 });
